@@ -23,12 +23,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
+      <header>Aqui será o HEADER (Iago vai fazer)</header>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>
+      <footer>Aqui será o FOOTER (Iago vai fazer)</footer>
     </html>
   );
 }
