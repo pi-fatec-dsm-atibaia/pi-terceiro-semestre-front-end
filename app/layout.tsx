@@ -28,8 +28,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-        <Link href={"/cadastro"}> Cadastro </Link>
+      >
         {children}
         <Rodape/>
       </body>

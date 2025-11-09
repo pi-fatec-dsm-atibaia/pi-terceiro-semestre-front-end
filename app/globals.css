@@ -1,8 +1,7 @@
 @import "tailwindcss";
-
 :root {
-  --Fatec-Grad: linear-gradient(45deg,#B20000,#4C0000);
-  --Fatec-Grad2: linear-gradient(45deg,#CC0000,#B20000);
-  --Fatec-Grad3: linear-gradient(45deg,#F00000,#DC281E);
-  --c01: #F7F7F7;
+  --Fatec-Grad: linear-gradient(45deg, #b20000, #4c0000);
+  --Fatec-Grad2: linear-gradient(45deg, #cc0000, #b20000);
+  --Fatec-Grad3: linear-gradient(45deg, #f00000, #dc281e);
+  --c01: #f7f7f7;
 }
