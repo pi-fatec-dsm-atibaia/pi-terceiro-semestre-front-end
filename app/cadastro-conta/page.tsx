@@ -11,11 +11,11 @@ import { Title } from "@/src/components/title";
 export default function Login() {
   return (
     <BackgroundGradient>
-      <Title>Login</Title>
+      <Title>Cadastro</Title>
       <Form>
         <div className="flex">
           <RedMarker />
-          <h3 className="font-bold">Faça seu Login</h3>
+          <h3 className="font-bold">Faça seu Cadastro</h3>
         </div>
         <div className="space-x-3 grid sm:grid-cols-2 gap-3">
           <div>
@@ -27,11 +27,7 @@ export default function Login() {
             <InputPasswordForm id="senha" placeholder="Informe a sua senha" />
           </div>
         </div>
-        <ButtonSubmitForm>Entrar</ButtonSubmitForm>
-        <div>
-          <Exits href="/cadastro-conta">Não possui uma conta?</Exits>
-          <Exits href="/recuperacao-senha">Esqueci minha senha</Exits>
-        </div>
+        <ButtonSubmitForm>Cadastrar</ButtonSubmitForm>
       </Form>
     </BackgroundGradient>
   );
