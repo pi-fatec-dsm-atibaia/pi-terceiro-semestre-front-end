@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Rodape from "../src/components/rodape/index";
+import Link from "next/link";
 import Cabecalho from "@/src/components/cabecalho";
 
 const geistSans = Geist({
@@ -29,9 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Cabecalho/>
+        <Cabecalho />
         {children}
-        <Rodape/>
+        <Rodape />
       </body>
     </html>
   );
