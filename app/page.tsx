@@ -17,7 +17,7 @@ export default function Login() {
           <RedMarker />
           <h3 className="font-bold">Faça seu Login</h3>
         </div>
-        <div className="space-x-3 grid sm:grid-cols-2 gap-3">
+        <div className="grid gap-3">
           <div>
             <LabelForm>Email:</LabelForm>
             <InputEmailForm id="email" placeholder="Informe o seu e-mail" />

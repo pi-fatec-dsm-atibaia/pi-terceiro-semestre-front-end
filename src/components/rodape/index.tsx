@@ -4,7 +4,7 @@ export default function Rodape() {
   return (
     <footer className="bg-black">
       <div className="mx-auto w-full max-w-7xl p-4 py-6 lg:py-8">
-        <div className="grid grid-cols-3 justify-evenly">
+        <div className="grid sm:grid-cols-3 justify-evenly">
           <section className="flex items-center justify-center">
             <Image
               src="/images/logo_fatec_br.png"
