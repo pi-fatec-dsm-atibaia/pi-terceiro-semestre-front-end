@@ -33,7 +33,7 @@ export default function CadastroCurso() {
           </div>
 
           <LabelForm>Periodo:*</LabelForm>
-          <SelectForm>
+          <SelectForm id="periodo">
             <option value="">--Selecione uma opção--</option>
             <option value="matutino">Matutino</option>
             <option value="vespertino">Vespertino</option>

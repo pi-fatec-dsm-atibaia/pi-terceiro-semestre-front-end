@@ -1,3 +1,5 @@
+"use client";
+
 import BackgroundGradient from "@/src/components/backgroundGradient";
 import { ButtonSubmitForm } from "@/src/components/buttonSubmitForm";
 import Form from "@/src/components/form";
