@@ -2,13 +2,13 @@ import BackgroundGradient from "@/src/components/backgroundGradient";
 import { ButtonSubmitForm } from "@/src/components/buttonSubmitForm";
 import FormNoImage from "@/src/components/form-noimage";
 import InputCpfCnpj from "@/src/components/inputCpfCnpj";
-import InputNumberForm from "@/src/components/inputNumberForm";
+import InputPeriodoTrabalho from "@/src/components/inputPeriodo";
 import InputTelefone from "@/src/components/inputTelefone";
 import InputTextForm from "@/src/components/inputTextForm";
 import InputWebsite from "@/src/components/inputWebSite";
 import { LabelForm } from "@/src/components/labelForm";
 import RedMarker from "@/src/components/redMarker";
-import { SelectForm } from "@/src/components/selectForm";
+import ResumoSolicitacao from "@/src/components/resumoSolicit";
 import { Title1 } from "@/src/components/titles";
 
 export default function SolicitacaoOrientador() {
@@ -24,7 +24,15 @@ export default function SolicitacaoOrientador() {
               informações sobre a experiencia do aluno
             </h3>
           </div>
-          <div className="grid lg:grid-cols-2 lg:space-x-[50px]">
+          <ResumoSolicitacao
+            dataSolicitacao="16/02/2025"
+            protocolo="9999.99"
+            tipoEquivalencia="CTPS"
+            nomeAluno="Marcos da Silva"
+            cpf="12345678910"
+            status="Aguardando Ass. Empregador"
+          />
+          <div className="grid lg:grid-cols-3 lg:space-x-[50px]">
             <div className="mt-2.5 space-y-[20px]">
               <div>
                 <LabelForm>Nome do empregador:*</LabelForm>
@@ -47,6 +55,15 @@ export default function SolicitacaoOrientador() {
                   placeholder="Informe o Cargo do empregador"
                 />
               </div>
+              <div>
+                <LabelForm>Razão social:*</LabelForm>
+                <InputTextForm
+                  id="razaoSocial"
+                  placeholder="Informe a razão social da empresa"
+                />
+              </div>
+            </div>
+            <div className="mt-2.5 space-y-[20px]">
               <div>
                 <LabelForm>Telefone da empresa:*</LabelForm>
                 <InputTelefone id="TelEmp" />
@@ -71,15 +88,12 @@ export default function SolicitacaoOrientador() {
               </div>
             </div>
             <div className="mt-2.5 space-y-[20px]">
-              <div className="bg-red-500">
+              <div className="items-center">
                 <LabelForm>Periodo de trabalho do aluno:*</LabelForm>
-                <>***************************</>
-              </div>
-              <div>
-                <LabelForm>Razão social:*</LabelForm>
-                <InputTextForm
-                  id="razaoSocial"
-                  placeholder="Informe a razão social da empresa"
+                <InputPeriodoTrabalho
+                  startId="dataInicio"
+                  endId="dataFim"
+                  required
                 />
               </div>
               <div>
