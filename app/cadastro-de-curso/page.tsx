@@ -6,13 +6,14 @@ import InputTextForm from "@/src/components/inputTextForm";
 import { LabelForm } from "@/src/components/labelForm";
 import RedMarker from "@/src/components/redMarker";
 import { SelectForm } from "@/src/components/selectForm";
-import { Title } from "@/src/components/title";
+import { Title1 } from "@/src/components/titles";
+import { error } from "console";
 
 export default function CadastroCurso() {
   return (
     <div className=" bg-(--c01)">
       <BackgroundGradient>
-        <Title>Cadastro de Curso</Title>
+        <Title1>Cadastro de Curso</Title1>
         <Form>
           <div className="flex">
             <RedMarker />

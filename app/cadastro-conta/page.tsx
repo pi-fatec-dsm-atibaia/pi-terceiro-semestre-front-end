@@ -6,12 +6,12 @@ import InputEmailForm from "@/src/components/inputEmailForm";
 import InputPasswordForm from "@/src/components/inputPasswordForm";
 import { LabelForm } from "@/src/components/labelForm";
 import RedMarker from "@/src/components/redMarker";
-import { Title } from "@/src/components/title";
+import { Title1 } from "@/src/components/titles";
 
 export default function Login() {
   return (
     <BackgroundGradient>
-      <Title>Cadastro</Title>
+      <Title1>Cadastro</Title1>
       <Form>
         <div className="flex">
           <RedMarker />

@@ -6,13 +6,13 @@ import InputPasswordForm from "@/src/components/inputPasswordForm";
 import InputTextForm from "@/src/components/inputTextForm";
 import { LabelForm } from "@/src/components/labelForm";
 import RedMarker from "@/src/components/redMarker";
-import { Title } from "@/src/components/title";
+import { Title1 } from "@/src/components/titles";
 
 export default function CadastroAdm() {
   return (
     <div className=" bg-(--c01)">
       <BackgroundGradient>
-        <Title>Cadastro de Administrador</Title>
+        <Title1>Cadastro de Administrador</Title1>
         <Form>
           <div className="flex">
             <RedMarker />
