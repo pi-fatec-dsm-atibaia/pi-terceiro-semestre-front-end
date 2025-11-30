@@ -1,66 +1,56 @@
-"use client";
+import React, { useState, ChangeEvent } from 'react';
 
-import React, { useRef, useState, useCallback } from "react";
-import { Upload } from "lucide-react"; // Biblioteca popular de ícones (exemplo)
-
-interface FileUploadProps {
+// Tipagem para os props do componente
+interface DocumentUploadProps {
   label: string;
-  buttonText: string;
-  accept: string; // Ex: "image/*, application/pdf, .doc, .docx"
-  onFileUpload: (files: FileList | null) => void;
-  darkStyle?: boolean; // Para o botão preto
+  name: string;
+  onFileChange: (name: string, file: File | null) => void;
 }
 
-export const FileUpload: React.FC<FileUploadProps> = ({
-  label,
-  buttonText,
-  accept,
-  onFileUpload,
-  darkStyle = false,
-}) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+const DocumentUpload: React.FC<DocumentUploadProps> = ({ label, name, onFileChange }) => {
+  const [fileName, setFileName] = useState<string | null>(null);
 
-  // Função que é chamada quando o botão é clicado (aciona o input escondido)
-  const handleClick = () => {
-    inputRef.current?.click();
+  // Manipulador de eventos para quando um arquivo é selecionado
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files ? event.target.files[0] : null;
+
+    setFileName(file ? file.name : null);
+    onFileChange(name, file); // Envia o arquivo para o componente pai
   };
 
-  // Função que lida com a seleção de arquivos
-  const handleFileChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      onFileUpload(e.target.files);
-      // Opcional: Limpar o valor do input para permitir o upload do mesmo arquivo novamente
-      if (inputRef.current) {
-        inputRef.current.value = "";
-      }
-    },
-    [onFileUpload]
-  );
-
-  const baseClasses =
-    "w-full py-4 px-6 rounded-md shadow-md flex items-center justify-center font-semibold transition duration-200 cursor-pointer text-base";
-
-  const styleClasses = darkStyle
-    ? "bg-black text-white hover:bg-gray-800" // Estilo para 'Informativo CTPS'
-    : "bg-white text-black border border-gray-300 hover:bg-gray-50"; // Estilo para 'Registro CTPS'
+  // Define os tipos de arquivo permitidos:
+  // image/*: qualquer tipo de imagem
+  // application/pdf: arquivos PDF (documento de texto comum)
+  // .doc, .docx: arquivos do Microsoft Word
+  const acceptedFileTypes = "image/*, application/pdf, .doc, .docx";
 
   return (
-    <div className="mb-4">
-      {/* 1. O Input de Arquivo ESCONDIDO */}
+    <div style={{ marginBottom: '15px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
+      <label htmlFor={name} style={{ fontWeight: 'bold' }}>{label}:</label>
+      
+      {/* O input de arquivo real, que fica invisível ou estilizado */}
       <input
         type="file"
-        ref={inputRef}
+        id={name}
+        name={name}
+        accept={acceptedFileTypes}
         onChange={handleFileChange}
-        // Define os tipos de arquivo aceitos: Imagem, PDF, Word, Texto
-        accept={accept}
-        className="hidden"
+        style={{ display: 'none' }} // Esconda o input padrão
       />
 
-      {/* 2. O Botão Estilizado que Aciona o Input */}
-      <div className={baseClasses + " " + styleClasses} onClick={handleClick}>
-        <Upload size={20} className="mr-3" /> {/* Ícone de upload */}
-        {buttonText}
-      </div>
+      {/* Botão customizado que "clica" no input escondido */}
+      <button 
+        type="button" 
+        onClick={() => document.getElementById(name)?.click()}
+        style={{ marginLeft: '10px', padding: '5px 15px', cursor: 'pointer' }}
+      >
+        {fileName ? `Mudar Arquivo (${fileName})` : 'Selecionar Arquivo'}
+      </button>
+
+      {fileName && <p style={{ fontSize: '0.8em', marginTop: '5px' }}>Arquivo selecionado: **{fileName}**</p>}
+      
     </div>
   );
 };
+
+export default DocumentUpload;
