@@ -1,26 +1,7 @@
 @import "tailwindcss";
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  --Fatec-Grad: linear-gradient(45deg, #b20000, #4c0000);
+  --Fatec-Grad2: linear-gradient(45deg, #cc0000, #b20000);
+  --Fatec-Grad3: linear-gradient(45deg, #f00000, #dc281e);
+  --c01: #f7f7f7;
 }
