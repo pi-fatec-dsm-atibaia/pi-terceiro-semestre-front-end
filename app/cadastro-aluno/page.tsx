@@ -9,12 +9,12 @@ import InputTextForm from "@/src/components/inputTextForm";
 import { LabelForm } from "@/src/components/labelForm";
 import RedMarker from "@/src/components/redMarker";
 import { SelectForm } from "@/src/components/selectForm";
-import { Title } from "@/src/components/title";
+import { Title1 } from "@/src/components/titles";
 
 export default function CadastroAluno() {
   return (
     <BackgroundGradient>
-      <Title>Cadastro</Title>
+      <Title1>Cadastro</Title1>
       <Form>
         <div className="flex">
           <RedMarker />

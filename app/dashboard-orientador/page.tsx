@@ -1,7 +1,7 @@
 import BackgroundWhiteRed from "@/src/components/backgroundWhiteRed";
 import { Title2 } from "@/src/components/titles";
 
-export default function DashBoardAluno() {
+export default function DashBoardOrientador() {
     return (
         <div className="bg-(--c01)">
 
@@ -19,10 +19,9 @@ export default function DashBoardAluno() {
                                 className="max-sm:size-[100px] size-[192px] mt-[10px] place-self-center"
                             />
                             <div className="z-10 text-center ">
-                                <strong className="sm:text-4xl text-2xl">Solicitar</strong>
+                                <strong className="sm:text-4xl text-2xl">Visualizar solicitações</strong>
                                 <p className="mt-5 text-gray-500 sm:w-[250px] w-[150px]">
-                                    Selecione e solicite um de nossos tipos de equivalência
-                                    disponíveis.
+                                    Visualise todas os pedidos de equivalência dos alunos do curso orientado
                                 </p>
                             </div>
                             <img
@@ -33,7 +32,7 @@ export default function DashBoardAluno() {
                         </div>
                     </a>
                     {/*ACOMPANHAR*/}
-                    <a href="/minhas-solicitacoes" className="relative h-[200px] sm:h-[500px] grid sm:w-[100%] max-w-[350px] justify-center max-sm:ml-auto max-sm:mr-auto bg-white max-sm:flex border-dashed border-4">
+                    <a href="#" className="relative h-[200px] sm:h-[500px] grid sm:w-[100%] max-w-[350px] justify-center max-sm:ml-auto max-sm:mr-auto bg-white max-sm:flex border-dashed border-4">
                         <div className="grid gap-3">
                             <img
                                 src="/images/iconeConsultarEquivalencia.png"
@@ -41,10 +40,9 @@ export default function DashBoardAluno() {
                                 className="max-sm:size-[100px] size-[192px] mt-[10px] place-self-center"
                             />
                             <div className="z-10 text-center ">
-                                <strong className="sm:text-4xl text-2xl">Acompanhar</strong>
+                                <strong className="sm:text-4xl text-2xl">Bloqueado</strong>
                                 <p className="mt-5 text-gray-500 sm:w-[250px] w-[150px]">
-                                    Acompanhe as informações das solicitações de equivalência
-                                    realizadas.
+                                    Área em desenvolvimento
                                 </p>
                             </div>
                             <img

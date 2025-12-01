@@ -45,9 +45,6 @@ export default function RecuperacaoSenha() {
 	 	}
 	}
 		return (
-
-			
-			
 			 <BackgroundGradient>
 			 	<Title1>Recuperação de senha</Title1>
 			 	<Form>
