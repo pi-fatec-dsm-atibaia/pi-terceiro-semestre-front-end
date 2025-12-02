@@ -13,24 +13,26 @@ export default function Login() {
     <BackgroundGradient>
       <Title1>Login</Title1>
       <Form>
-        <div className="flex">
-          <RedMarker />
-          <h3 className="font-bold">Faça seu Login</h3>
-        </div>
-        <div className="grid gap-3">
-          <div>
-            <LabelForm>Email:</LabelForm>
-            <InputEmailForm id="email" placeholder="Informe o seu e-mail" />
+        <div className="space-y-[9%]">
+          <div className="flex">
+            <RedMarker />
+            <h3 className="font-bold">Faça seu Login</h3>
           </div>
-          <div>
-            <LabelForm>Senha:</LabelForm>
-            <InputPasswordForm id="senha" placeholder="Informe a sua senha" />
+          <div className="grid gap-3 space-y-[15%]">
+            <div>
+              <LabelForm>Email:</LabelForm>
+              <InputEmailForm id="email" placeholder="Informe o seu e-mail" />
+            </div>
+            <div>
+              <LabelForm>Senha:</LabelForm>
+              <InputPasswordForm id="senha" placeholder="Informe a sua senha" />
+            </div>
           </div>
-        </div>
-        <ButtonSubmitForm>Entrar</ButtonSubmitForm>
-        <div>
-          <Exits href="/cadastro-conta">Não possui uma conta?</Exits>
-          <Exits href="/recuperacao-senha">Esqueci minha senha</Exits>
+          <ButtonSubmitForm>Entrar</ButtonSubmitForm>
+          <div>
+            <Exits href="/cadastro-conta">Não possui uma conta?</Exits>
+            <Exits href="/recuperacao-senha">Esqueci minha senha</Exits>
+          </div>
         </div>
       </Form>
     </BackgroundGradient>

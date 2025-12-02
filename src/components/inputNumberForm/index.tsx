@@ -51,6 +51,7 @@ export default function InputNumberForm({
           type={"number"}
           placeholder={placeholder}
           value={value}
+          required
           onChange={(e) => setValue(e.target.value)}
           onBlur={handleBlur}
           className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)

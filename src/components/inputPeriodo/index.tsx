@@ -64,6 +64,7 @@ export default function InputPeriodoTrabalho({
           id={endId}
           type="date"
           value={dataFim}
+          required
           onChange={(e) => {
             setDataFim(e.target.value);
             if (erro) setErro("");

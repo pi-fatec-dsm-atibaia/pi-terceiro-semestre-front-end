@@ -13,7 +13,6 @@ import { Title1 } from "@/src/components/titles";
 import { useState } from "react";
 
 export default function CadastroAluno() {
-
   const [mensagem, setMensagem] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
@@ -28,9 +27,12 @@ export default function CadastroAluno() {
       ra: (document.getElementById("ra") as HTMLInputElement).value,
       curso: (document.getElementById("curso") as HTMLSelectElement).value,
       periodo: (document.getElementById("periodo") as HTMLSelectElement).value,
-      semestre: (document.getElementById("semestre") as HTMLSelectElement).value,
+      semestre: (document.getElementById("semestre") as HTMLSelectElement)
+        .value,
       senha: (document.getElementById("senha") as HTMLInputElement).value,
-      confirmSenha: (document.getElementById("confirmSenha") as HTMLInputElement).value,
+      confirmSenha: (
+        document.getElementById("confirmSenha") as HTMLInputElement
+      ).value,
     };
 
     if (data.senha !== data.confirmSenha) {
@@ -39,10 +41,10 @@ export default function CadastroAluno() {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/api/students", {
+      const response = await fetch("http://localhost:3000/api/students", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       const result = await response.json();
@@ -52,7 +54,6 @@ export default function CadastroAluno() {
       } else {
         setMensagem(result.message || "Erro ao cadastrar.");
       }
-
     } catch (err) {
       setMensagem("Falha na comunicação com o servidor.");
     }
@@ -102,14 +103,16 @@ export default function CadastroAluno() {
           <div>
             <LabelForm>Curso:</LabelForm>
             <SelectForm id="curso">
-              <option value="" selected disabled>Escolha</option>
+              <option value="" selected disabled></option>
               <option value="dsm">DSM</option>
             </SelectForm>
           </div>
           <div>
             <LabelForm>Periodo:</LabelForm>
             <SelectForm id="periodo">
-              <option value="" selected disabled>Escolha</option>
+              <option value="" selected disabled>
+                Escolha
+              </option>
               <option value="matutino">Matutino</option>
               <option value="vespertino">Vespertino</option>
               <option value="noturno">Noturno</option>
@@ -118,7 +121,9 @@ export default function CadastroAluno() {
           <div>
             <LabelForm>Semestre:</LabelForm>
             <SelectForm id="semestre">
-              <option value="" selected disabled>Escolha</option>
+              <option value="" selected disabled>
+                Escolha
+              </option>
               <option value="1">1° Semestre</option>
               <option value="2">2° Semestre</option>
               <option value="3">3° Semestre</option>
@@ -136,16 +141,17 @@ export default function CadastroAluno() {
           </div>
           <div>
             <LabelForm>Confirme sua senha:</LabelForm>
-            <InputPasswordForm id="confirmSenha" placeholder="Confirme a senha digitada" />
+            <InputPasswordForm
+              id="confirmSenha"
+              placeholder="Confirme a senha digitada"
+            />
           </div>
         </div>
 
         <ButtonSubmitForm>Cadastrar</ButtonSubmitForm>
 
         {mensagem && (
-          <p className="text-center mt-3 font-bold text-red-500">
-            {mensagem}
-          </p>
+          <p className="text-center mt-3 font-bold text-red-500">{mensagem}</p>
         )}
       </Form>
     </BackgroundGradient>
