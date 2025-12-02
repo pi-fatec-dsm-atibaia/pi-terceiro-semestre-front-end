@@ -66,57 +66,61 @@ export default function CadastroOtr() {
             <RedMarker />
             <h3 className="font-bold">Dados do Orientador</h3>
           </div>
-          <div className="space-x-3 grid sm:grid-cols-2 gap-3">
-            <div>
-              <LabelForm>Nome:</LabelForm>
-              <InputTextForm
-                id="nomeOtr"
-                placeholder="Informe o nome do orientador"
-              />
-            </div>
-            <div>
-              <LabelForm>Email:</LabelForm>
-              <InputEmailForm
-                id="emailOtr"
-                placeholder="Informe o email do orientador"
-              />
-            </div>
-          </div>
-          <div className="space-x-3 grid sm:grid-cols-2 gap-3">
-            <div>
-              <LabelForm>CPF:</LabelForm>
-              <InputCpfCnpj
-                id="cpfOtr"
-                placeholder="Informe o CPF do orientador"
-              />
-            </div>
-            <div className="space-y-3 grid">
+          <div className="space-y-[40px]">
+            <div className="space-x-3 grid sm:grid-cols-2 gap-3">
               <div>
-                <LabelForm>Senha:</LabelForm>
+                <LabelForm>Nome:</LabelForm>
+                <InputTextForm
+                  id="nomeOtr"
+                  placeholder="Informe o nome do orientador"
+                />
+              </div>
+              <div>
+                <LabelForm>Email:</LabelForm>
+                <InputEmailForm
+                  id="emailOtr"
+                  placeholder="Informe o email do orientador"
+                />
+              </div>
+            </div>
+            <div className="space-x-3 grid sm:grid-cols-2 gap-3">
+              <div>
+                <LabelForm>CPF:</LabelForm>
+                <InputCpfCnpj
+                  id="cpfOtr"
+                  placeholder="Informe o CPF do orientador"
+                />
+              </div>
+              <div className="space-y-3 grid">
+                <div>
+                  <LabelForm>Senha:</LabelForm>
+                  <InputPasswordForm
+                    id="senhaOtr"
+                    placeholder="Informe a senha do orientador"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="space-x-3 grid sm:grid-cols-2 gap-3">
+              <div>
+                <LabelForm>Curso Vinculado:</LabelForm>
+                <SelectForm
+                  id="cursoOtr"
+                  placeholder="Informe o curso do orientador"
+                >
+                  <option value="" selected disabled></option>
+                  <option value="dsm">DSM</option>
+                </SelectForm>
+              </div>
+              <div>
+                <LabelForm>Confirmação de senha:</LabelForm>
                 <InputPasswordForm
-                  id="senhaOtr"
-                  placeholder="Informe a senha do orientador"
+                  id="confirm"
+                  placeholder="Confirme a senha"
                 />
               </div>
             </div>
           </div>
-          <div className="space-x-3 grid sm:grid-cols-2 gap-3">
-            <div>
-              <LabelForm>Curso Vinculado:</LabelForm>
-              <SelectForm
-                id="cursoOtr"
-                placeholder="Informe o curso do orientador"
-              >
-                <option value="" selected disabled></option>
-                <option value="dsm">DSM</option>
-              </SelectForm>
-            </div>
-            <div>
-              <LabelForm>Confirmação de senha:</LabelForm>
-              <InputPasswordForm id="confirm" placeholder="Confirme a senha" />
-            </div>
-          </div>
-
           <ButtonSubmitForm>Cadastrar</ButtonSubmitForm>
           {mensagem && (
             <p className="text-center mt-3 font-bold text-red-500">

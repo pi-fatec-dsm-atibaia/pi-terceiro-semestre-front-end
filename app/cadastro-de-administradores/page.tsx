@@ -67,46 +67,51 @@ export default function CadastroAdm() {
             <RedMarker />
             <h3 className="font-bold">Dados do Administrador</h3>
           </div>
-          <div className="space-x-3 grid sm:grid-cols-2 gap-3">
-            <div>
-              <LabelForm>Nome:</LabelForm>
-              <InputTextForm
-                id="nomeAdm"
-                placeholder="Informe o nome do administrador"
-              />
+          <div className="space-y-[40px]">
+            <div className="space-x-3 grid sm:grid-cols-2 gap-3">
+              <div>
+                <LabelForm>Nome:</LabelForm>
+                <InputTextForm
+                  id="nomeAdm"
+                  placeholder="Informe o nome do administrador"
+                />
+              </div>
+              <div>
+                <LabelForm>Email:</LabelForm>
+                <InputEmailForm
+                  id="emailAdm"
+                  placeholder="Informe o email do administrador"
+                />
+              </div>
             </div>
-            <div>
-              <LabelForm>Email:</LabelForm>
-              <InputEmailForm
-                id="emailAdm"
-                placeholder="Informe o email do administrador"
-              />
+            <div className="space-x-3 grid sm:grid-cols-2 gap-3">
+              <div>
+                <LabelForm>Telefone:</LabelForm>
+                <InputTelefone id="telefoneAdm" />
+              </div>
+              <div>
+                <LabelForm>Senha:</LabelForm>
+                <InputPasswordForm
+                  id="senhaAdm"
+                  placeholder="Informe a senha do administrador"
+                />
+              </div>
             </div>
-          </div>
-          <div className="space-x-3 grid sm:grid-cols-2 gap-3">
-            <div>
-              <LabelForm>Telefone:</LabelForm>
-              <InputTelefone id="telefoneAdm" />
-            </div>
-            <div>
-              <LabelForm>Senha:</LabelForm>
-              <InputPasswordForm
-                id="senhaAdm"
-                placeholder="Informe a senha do administrador"
-              />
-            </div>
-          </div>
-          <div className="space-x-3 grid sm:grid-cols-2 gap-3">
-            <div>
-              <LabelForm>CPF:</LabelForm>
-              <InputCpfCnpj
-                id="cpfAdm"
-                placeholder="Informe o CPF do administrador"
-              />
-            </div>
-            <div>
-              <LabelForm>Confirmação de senha:</LabelForm>
-              <InputPasswordForm id="confirm" placeholder="Confirme a senha" />
+            <div className="space-x-3 grid sm:grid-cols-2 gap-3">
+              <div>
+                <LabelForm>CPF:</LabelForm>
+                <InputCpfCnpj
+                  id="cpfAdm"
+                  placeholder="Informe o CPF do administrador"
+                />
+              </div>
+              <div>
+                <LabelForm>Confirmação de senha:</LabelForm>
+                <InputPasswordForm
+                  id="confirm"
+                  placeholder="Confirme a senha"
+                />
+              </div>
             </div>
           </div>
           <ButtonSubmitForm>Cadastrar</ButtonSubmitForm>

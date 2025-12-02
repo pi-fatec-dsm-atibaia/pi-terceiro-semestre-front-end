@@ -10,7 +10,7 @@ export default function DashBoardAluno() {
         <div className="w-full z-10 sm:flex justify-center gap-[5%]">
           {/*SOLICITAR*/}
           <Link
-            href=""
+            href="./equivalencias"
             className="h-[200px] sm:h-[500px] sm:w-[100%] max-w-[350px]"
           >
             <div className="relative h-[200px] sm:h-[500px] sm:w-[100%] max-w-[350px] justify-center max-sm:ml-auto max-sm:mr-auto bg-white max-sm:flex ">

@@ -53,42 +53,47 @@ export default function CadastroCurso() {
             <RedMarker />
             <h3 className="font-bold">Dados do curso</h3>
           </div>
-          <div className="space-x-3 grid sm:grid-cols-2 gap-3">
-            <div>
-              <LabelForm>Nome:</LabelForm>
-              <InputTextForm id="nome" placeholder="Informe o nome do curso" />
+          <div className="space-y-[40px]">
+            <div className="space-x-3 grid sm:grid-cols-2 gap-3">
+              <div>
+                <LabelForm>Nome:</LabelForm>
+                <InputTextForm
+                  id="nome"
+                  placeholder="Informe o nome do curso"
+                />
+              </div>
+              <div>
+                <LabelForm>Código:</LabelForm>
+                <InputTextForm
+                  id="codigo"
+                  placeholder="Informe o código abreviado"
+                />
+              </div>
             </div>
-            <div>
-              <LabelForm>Código:</LabelForm>
-              <InputTextForm
-                id="codigo"
-                placeholder="Informe o código abreviado"
-              />
-            </div>
+
+            <LabelForm>Periodo:</LabelForm>
+            <SelectForm id="periodo">
+              <option value="" selected disabled>
+                --Selecione uma opção--
+              </option>
+              <option value="matutino">Matutino</option>
+              <option value="vespertino">Vespertino</option>
+              <option value="noturno">Noturno</option>
+            </SelectForm>
+
+            <LabelForm>Semestres:</LabelForm>
+            <SelectForm id="quantSemestre">
+              <option value="" selected disabled>
+                Escolha
+              </option>
+              <option value="1">1 Semestre</option>
+              <option value="2">2 Semestres</option>
+              <option value="3">3 Semestres</option>
+              <option value="4">4 Semestres</option>
+              <option value="5">5 Semestres</option>
+              <option value="6">6 Semestres</option>
+            </SelectForm>
           </div>
-
-          <LabelForm>Periodo:</LabelForm>
-          <SelectForm id="periodo">
-            <option value="" selected disabled>
-              --Selecione uma opção--
-            </option>
-            <option value="matutino">Matutino</option>
-            <option value="vespertino">Vespertino</option>
-            <option value="noturno">Noturno</option>
-          </SelectForm>
-
-          <LabelForm>Semestres:</LabelForm>
-          <SelectForm id="quantSemestre">
-            <option value="" selected disabled>
-              Escolha
-            </option>
-            <option value="1">1 Semestre</option>
-            <option value="2">2 Semestres</option>
-            <option value="3">3 Semestres</option>
-            <option value="4">4 Semestres</option>
-            <option value="5">5 Semestres</option>
-            <option value="6">6 Semestres</option>
-          </SelectForm>
           <ButtonSubmitForm>Cadastrar Curso</ButtonSubmitForm>
           {mensagem && (
             <p className="text-center mt-3 font-bold text-red-500">
