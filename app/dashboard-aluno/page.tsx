@@ -13,7 +13,8 @@ export default function DashBoardAluno() {
             href="./equivalencias"
             className="h-[200px] sm:h-[500px] sm:w-[100%] max-w-[350px]"
           >
-            <div className="relative h-[200px] sm:h-[500px] sm:w-[100%] max-w-[350px] justify-center max-sm:ml-auto max-sm:mr-auto bg-white max-sm:flex ">
+            <div className="relative h-[200px] sm:h-[500px] sm:w-[100%] max-w-[350px] justify-center max-sm:ml-auto max-sm:mr-auto bg-white max-sm:flex border-4 border-dashed grid">
+              
               <img
                 src="/images/iconeSolicitarEquivalencia.png"
                 alt=""
@@ -29,7 +30,7 @@ export default function DashBoardAluno() {
               <img
                 src="/images/iconeSetaVerde.png"
                 alt=""
-                className="place-self-center absolute bottom-14 max-sm:hidden size-[60px]"
+                className="place-self-center bottom-14 max-sm:hidden size-[60px]"
               />
             </div>
           </Link>
@@ -38,7 +39,7 @@ export default function DashBoardAluno() {
             href="./minhas-solicitacoes"
             className="h-[200px] sm:h-[500px] sm:w-[100%] max-w-[350px]"
           >
-            <div className="relative h-[200px] sm:h-[500px] sm:w-[100%] max-w-[350px] justify-center max-sm:ml-auto max-sm:mr-auto bg-white max-sm:flex ">
+            <div className="relative h-[200px] sm:h-[500px] sm:w-[100%] max-w-[350px] justify-center max-sm:ml-auto max-sm:mr-auto bg-white max-sm:flex border-4 border-dashed grid">
               <img
                 src="/images/iconeConsultarEquivalencia.png"
                 alt=""
@@ -54,7 +55,7 @@ export default function DashBoardAluno() {
               <img
                 src="/images/iconeSetaAzul.png"
                 alt=""
-                className="place-self-center absolute bottom-14 max-sm:hidden size-[60px]"
+                className="place-self-center bottom-14 max-sm:hidden size-[60px]"
               />
             </div>
           </Link>

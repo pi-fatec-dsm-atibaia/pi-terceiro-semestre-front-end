@@ -3,8 +3,10 @@
 import BackgroundGradient from "@/src/components/backgroundGradient";
 import { ButtonSubmitForm } from "@/src/components/buttonSubmitForm";
 import Form from "@/src/components/form";
+import InputCpfCnpj from "@/src/components/inputCpfCnpj";
 import InputEmailForm from "@/src/components/inputEmailForm";
 import InputPasswordForm from "@/src/components/inputPasswordForm";
+import InputTelefone from "@/src/components/inputTelefone";
 import InputTextForm from "@/src/components/inputTextForm";
 import { LabelForm } from "@/src/components/labelForm";
 import RedMarker from "@/src/components/redMarker";
@@ -80,14 +82,14 @@ export default function CadastroAluno() {
             </div>
             <div>
               <LabelForm>Telefone:</LabelForm>
-              <InputTextForm id="telefone" placeholder="Digite seu telefone" />
+              <InputTelefone id="telefone" />
             </div>
           </div>
 
           <div className="space-x-3 grid sm:grid-cols-3 gap-3">
             <div>
               <LabelForm>CPF:</LabelForm>
-              <InputTextForm id="cpf" placeholder="Digite seu CPF" />
+              <InputCpfCnpj id="cpf" placeholder="Digite seu CPF" />
             </div>
             <div>
               <LabelForm>RG:</LabelForm>

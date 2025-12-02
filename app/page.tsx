@@ -91,7 +91,7 @@ export default function Login() {
           </div>
           <div>
             <ButtonSubmitForm>Entrar</ButtonSubmitForm>
-            <Exits href="/cadastro-conta">Não possui uma conta?</Exits>
+            <Exits href="/cadastro-aluno">Não possui uma conta?</Exits>
             <Exits href="/recuperacao-senha">Esqueci minha senha</Exits>
           </div>
         </div>
