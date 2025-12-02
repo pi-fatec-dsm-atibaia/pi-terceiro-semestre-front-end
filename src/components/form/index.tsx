@@ -1,7 +1,12 @@
-export default function Form({ children }: { children: React.ReactNode }) {
+interface FormProps {
+  children: React.ReactNode;
+  onSubmit?: React.FormEventHandler<HTMLFormElement>;
+}
+
+export default function Form({ children, onSubmit }: FormProps) {
   return (
     <div className="bg-white rounded-2xl flex overflow-hidden mx-auto w-screen sm:w-[80%] shadow relative ">
-      {/*Lado Esquerdo*/}
+      {/* Lado Esquerdo */}
       <div className="w-0 sm:w-1/2">
         <img
           src="/images/ciemIII.jpeg"
@@ -9,9 +14,10 @@ export default function Form({ children }: { children: React.ReactNode }) {
           className="h-full w-full object-cover"
         />
       </div>
-      {/*Lado Direito*/}
+
+      {/* Lado Direito */}
       <div className="sm:w-1/2 p-1 mx-auto">
-        <form className="space-y-[10%] items-center p-1.5 sm:p-6">
+        <form onSubmit={onSubmit} className="space-y-[10%] items-center p-1.5 sm:p-6">
           {children}
         </form>
       </div>

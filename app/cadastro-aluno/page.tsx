@@ -9,17 +9,65 @@ import InputTextForm from "@/src/components/inputTextForm";
 import { LabelForm } from "@/src/components/labelForm";
 import RedMarker from "@/src/components/redMarker";
 import { SelectForm } from "@/src/components/selectForm";
-import { Title } from "@/src/components/title";
+import { Title1 } from "@/src/components/titles";
+import { useState } from "react";
 
 export default function CadastroAluno() {
+
+  const [mensagem, setMensagem] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    const data = {
+      nome: (document.getElementById("nome") as HTMLInputElement).value,
+      email: (document.getElementById("email") as HTMLInputElement).value,
+      telefone: (document.getElementById("telefone") as HTMLInputElement).value,
+      cpf: (document.getElementById("cpf") as HTMLInputElement).value,
+      rg: (document.getElementById("rg") as HTMLInputElement).value,
+      ra: (document.getElementById("ra") as HTMLInputElement).value,
+      curso: (document.getElementById("curso") as HTMLSelectElement).value,
+      periodo: (document.getElementById("periodo") as HTMLSelectElement).value,
+      semestre: (document.getElementById("semestre") as HTMLSelectElement).value,
+      senha: (document.getElementById("senha") as HTMLInputElement).value,
+      confirmSenha: (document.getElementById("confirmSenha") as HTMLInputElement).value,
+    };
+
+    if (data.senha !== data.confirmSenha) {
+      setMensagem("As senhas não coincidem.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3001/api/students", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setMensagem("Aluno cadastrado com sucesso!");
+      } else {
+        setMensagem(result.message || "Erro ao cadastrar.");
+      }
+
+    } catch (err) {
+      setMensagem("Falha na comunicação com o servidor.");
+    }
+  }
+
   return (
     <BackgroundGradient>
-      <Title>Cadastro</Title>
-      <Form>
+      <Title1>Cadastro</Title1>
+
+      <Form onSubmit={handleSubmit}>
         <div className="flex">
           <RedMarker />
           <h3 className="font-bold">Faça seu Cadastro</h3>
         </div>
+
         <div className="space-x-3 grid sm:grid-cols-3 gap-3">
           <div>
             <LabelForm>Nome:</LabelForm>
@@ -34,6 +82,7 @@ export default function CadastroAluno() {
             <InputTextForm id="telefone" placeholder="Digite seu telefone" />
           </div>
         </div>
+
         <div className="space-x-3 grid sm:grid-cols-3 gap-3">
           <div>
             <LabelForm>CPF:</LabelForm>
@@ -48,6 +97,7 @@ export default function CadastroAluno() {
             <InputTextForm id="ra" placeholder="Digite seu RA" />
           </div>
         </div>
+
         <div className="space-x-3 grid sm:grid-cols-3 gap-3">
           <div>
             <LabelForm>Curso:</LabelForm>
@@ -78,6 +128,7 @@ export default function CadastroAluno() {
             </SelectForm>
           </div>
         </div>
+
         <div className="space-x-3 grid sm:grid-cols-2 gap-3">
           <div>
             <LabelForm>Senha:</LabelForm>
@@ -90,6 +141,12 @@ export default function CadastroAluno() {
         </div>
 
         <ButtonSubmitForm>Cadastrar</ButtonSubmitForm>
+
+        {mensagem && (
+          <p className="text-center mt-3 font-bold text-red-500">
+            {mensagem}
+          </p>
+        )}
       </Form>
     </BackgroundGradient>
   );
