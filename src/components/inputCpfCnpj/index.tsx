@@ -155,6 +155,7 @@ export default function InputCpfCnpj({
         id={id}
         type="text"
         value={documento}
+        required
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder={placeholder}

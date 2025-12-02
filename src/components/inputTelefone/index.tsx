@@ -65,6 +65,7 @@ export default function InputTelefone({
         id={id}
         type="text"
         value={telefone}
+        required
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder="Informe o número de telefone"

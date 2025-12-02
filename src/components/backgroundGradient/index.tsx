@@ -23,13 +23,9 @@ export default function BackgroundGradient({
         alt="Fatec Atibaia"
         className="w-0 sm:w-[40px] absolute botom-24 right-24"
       />
-      <img
-        src="/images/InovacaoTecnologiaEducacao.png"
-        alt="Fatec Atibaia"
-        className="h-0 sm:h-[20%] absolute mt-3 bottom-4 ml-[5%]"
-      />
+
       {/*Formulario*/}
-      <div className="inset-x-0 absolute z-20">{children}</div>
+      <div className=" inset-x-0 absolute z-20">{children}</div>
     </div>
   );
 }
