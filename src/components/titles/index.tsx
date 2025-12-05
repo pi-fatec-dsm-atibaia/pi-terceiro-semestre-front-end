@@ -4,7 +4,7 @@ interface TitleProps {
 
 export function Title1({ children }: TitleProps) {
   return (
-    <h1 className="absolute text-3xl sm:text-4xl text-gray-900 font-bold -top-[60px] inset-x-0 sm:left-[10%] z-10">
+    <h1 className="absolute text-3xl sm:text-4xl text-gray-900 font-bold max-lg:hidden -top-[45px] sm:-top-[50px] inset-x-0 sm:left-[10%] ml-2 z-10">
       {children}
     </h1>
   );

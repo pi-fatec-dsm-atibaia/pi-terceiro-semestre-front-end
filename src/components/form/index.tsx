@@ -5,9 +5,9 @@ interface FormProps {
 
 export default function Form({ children, onSubmit }: FormProps) {
   return (
-    <div className="bg-white rounded-2xl flex overflow-hidden mx-auto w-screen sm:w-[80%] h-[650px] shadow relative ">
+    <div className="bg-white rounded-2xl flex overflow-hidden mx-auto w-screen md:w-[80%] h-[400px] shadow relative ">
       {/* Lado Esquerdo */}
-      <div className="w-0 sm:w-1/2">
+      <div className="w-0 md:w-2/5">
         <img
           src="/images/ciemIII.jpeg"
           alt="Fatec Atibaia"
@@ -16,8 +16,8 @@ export default function Form({ children, onSubmit }: FormProps) {
       </div>
 
       {/* Lado Direito */}
-      <div className="sm:w-1/2 p-1 mx-auto">
-        <form onSubmit={onSubmit} className="items-center p-1.5 sm:p-6">
+      <div className="w-[100%] md:w-3/5 p-1 mx-auto overflow-y-auto">
+        <form onSubmit={onSubmit} className="items-center p-1.5 md:p-3">
           {children}
         </form>
       </div>
@@ -25,7 +25,7 @@ export default function Form({ children, onSubmit }: FormProps) {
       <img
         src="/images/PontosTL.png"
         alt="Fatec Atibaia"
-        className="w-[5%] sm:w-[2%] max-w-[30px] absolute bottom-4 right-4"
+        className="w-[5%] md:w-[2%] max-w-[30px] absolute bottom-4 right-4"
       />
     </div>
   );

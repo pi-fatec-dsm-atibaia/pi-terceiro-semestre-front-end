@@ -73,13 +73,13 @@ export default function Login() {
     <BackgroundGradient>
       <Title1>Login</Title1>
       <Form onSubmit={handleSubmit}>
-        <div className="space-y-[9%]">
+        <div className="space-y-[5px]">
           <div className="flex">
             <RedMarker />
             <h3 className="font-bold">Faça seu Login</h3>
           </div>
 
-          <div className="grid gap-3 space-y-[15%]">
+          <div className="grid gap-3 space-y-[20px]">
             <div>
               <LabelForm>Email:</LabelForm>
               <InputEmailForm id="email" placeholder="Informe o seu e-mail" />

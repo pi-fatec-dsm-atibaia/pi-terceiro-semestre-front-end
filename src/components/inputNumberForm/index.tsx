@@ -54,7 +54,7 @@ export default function InputNumberForm({
           required
           onChange={(e) => setValue(e.target.value)}
           onBlur={handleBlur}
-          className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)
+          className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01) w-100%
           ${
             error
               ? "border border-red-500 focus:ring-red-500"
