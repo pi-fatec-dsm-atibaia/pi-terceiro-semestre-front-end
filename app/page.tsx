@@ -20,15 +20,16 @@ interface LoginRoute {
 export default function Login() {
   const [mensagem, setMensagem] = useState("");
   const router = useRouter();
+  const API_URL = process.env.NEXT_PUBLIC_URL_BACK_END;
 
   const routes: LoginRoute[] = [
-    { url: "http://localhost:3000/api/students/login", role: "aluno" },
+    { url: `${API_URL}/api/students/login`, role: "aluno" },
     {
-      url: "http://localhost:3000/api/advisors/login-advisor",
+      url: `${API_URL}/api/advisors/login-advisor`,
       role: "orientador",
     },
     {
-      url: "http://localhost:3000/api/admins/login-admin",
+      url: `${API_URL}/api/admins/login-admin`,
       role: "administrador",
     },
   ];
@@ -49,10 +50,11 @@ export default function Login() {
         });
 
         const result = await response.json();
-
+        
         if (response.ok) {
+          localStorage.setItem("id_",result.data.id);
           if (route.role === "aluno") {
-            router.push("http://localhost:3001/dashboard-aluno");
+            router.push("/dashboard-aluno");
           }
           if (route.role === "orientador") {
             setMensagem("Logando como orientador");
@@ -91,7 +93,7 @@ export default function Login() {
           </div>
           <div>
             <ButtonSubmitForm>Entrar</ButtonSubmitForm>
-            <Exits href="/cadastro-aluno">Não possui uma conta?</Exits>
+            <Exits href="/cadastro/aluno">Não possui uma conta?</Exits>
             <Exits href="/recuperacao-senha">Esqueci minha senha</Exits>
           </div>
         </div>
