@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useCallback } from "react";
 import { X, CheckCircle, UploadCloud, ChevronDown } from "lucide-react";
+import InputTextForm from "../inputTextForm";
 
 // ===============================================
 // 1. Tipos de Dados e Mapeamento
@@ -16,9 +17,8 @@ type EquivalenciaType =
 
 const documentosPorTipo: Record<EquivalenciaType, string[]> = {
   CTPS: [
-    "Primeira pagina da carteira de trabalho",
-    "Pagina de RG e CPF",
-    "Pagina de Registro de Contrato",
+    "Informativo_CTPS",
+    "Registro_CTPS",
   ],
   Militar: [
     "Cópia da Identidade Militar",
@@ -243,7 +243,7 @@ export default function EquivalenciaForm() {
       // ======================================
       // 1️⃣ CRIA A SOLICITAÇÃO
       // ======================================
-      const solicitacaoRes = await fetch("http://localhost:3001/api/request", {
+      const solicitacaoRes = await fetch("http://localhost:3000/api/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -275,12 +275,14 @@ export default function EquivalenciaForm() {
       });
 
       const documentosRes = await fetch(
-        "http://localhost:3001/api/documents/upload",
+        "http://localhost:3000/api/request",
         {
           method: "POST",
           body: formDataUpload,
         }
       );
+
+      console.log(documentosRes);
 
       const documentosJson = await documentosRes.json();
 
@@ -311,7 +313,7 @@ export default function EquivalenciaForm() {
         className="flex flex-col md:flex-row max-w-6xl w-full shadow-xl rounded-xl overflow-hidden bg-white"
       >
         {/* ESQUERDA */}
-        <div className="md:w-1/2 w-full p-6 md:p-10 bg-black text-white flex flex-col">
+        <div className="md:w-1/2 h-140 w-full p-6 md:p-10 bg-black text-white flex flex-col">
           <h3 className="border-l-4 border-red-600 pl-3 uppercase font-semibold mb-2">
             Tipo de Equivalência
           </h3>
@@ -333,20 +335,34 @@ export default function EquivalenciaForm() {
             </select>
           </div>
 
-          <h3 className="border-l-4 border-red-600 pl-3 uppercase font-semibold mb-3">
-            Upload de Documentos
-          </h3>
-
-          <div className="flex-grow overflow-y-auto space-y-3 pr-1 mb-6">
-            {documentosObrigatorios.map((doc) => (
-              <DocumentUploadItem
+          <div className="relative mb-8">
+            <h3 className="border-l-4 border-red-600 pl-3 uppercase font-semibold mb-3">
+              Upload de Documentos
+            </h3>
+            <div className="grow overflow-y-auto space-y-3 pr-1">
+              {documentosObrigatorios.map((doc) => (
+                <DocumentUploadItem
                 key={doc}
                 documentName={doc}
                 uploadedFile={uploadedFiles[doc] || null}
                 onFileSelect={handleFileChange}
-              />
-            ))}
+                />
+              ))}
+            </div>
           </div>
+
+          <h3 className="border-l-4 border-red-600 pl-3 uppercase font-semibold mb-3">
+            Informações importantes
+          </h3>
+          <div className="grow overflow-y-auto overflow-hidden text-black space-y-3 pr-1">
+            <InputTextForm id="nomeEmpregador" placeholder="Nome do empregador" /> 
+            <InputTextForm id="cnpj" placeholder="CNPJ" />
+            <InputTextForm id="nomeEmpregador" placeholder="Nome do empregador" />
+            <InputTextForm id="nomeEmpregador" placeholder="Nome do empregador" />
+            <InputTextForm id="nomeEmpregador" placeholder="Nome do empregador" />
+          </div>
+          
+           
         </div>
 
         {/* DIREITA */}
