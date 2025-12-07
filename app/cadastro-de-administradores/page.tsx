@@ -63,10 +63,7 @@ export default function CadastroAdm() {
       <BackgroundGradient>
         <Title1>Cadastro de Administrador</Title1>
         <Form onSubmit={handleSubmit}>
-          <div className="flex">
-            <RedMarker />
-            <h3 className="font-bold">Dados do Administrador</h3>
-          </div>
+          <RedMarker>Dados do Administrador</RedMarker>
           <div className="space-y-[40px]">
             <div className="space-x-3 grid sm:grid-cols-2 gap-3">
               <div>

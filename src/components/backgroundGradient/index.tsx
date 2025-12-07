@@ -4,7 +4,7 @@ export default function BackgroundGradient({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-screen relative bg-(--c01) flex flex-col place-content-center">
+    <div className="h-screen relative sm:bg-(--c01) flex flex-col place-content-center">
       {/*Fundo gradient*/}
       <div className="z-10 bg-linear-to-b from-red-700 to-red-950 h-[250px] relative ">
         <img
@@ -25,7 +25,7 @@ export default function BackgroundGradient({
       />
 
       {/*Formulario*/}
-      <div className=" inset-x-0 absolute z-20">{children}</div>
+      <div className=" inset-x-0 mt-auto absolute z-20">{children}</div>
     </div>
   );
 }

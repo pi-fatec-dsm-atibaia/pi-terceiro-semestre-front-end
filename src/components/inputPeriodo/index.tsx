@@ -50,7 +50,7 @@ export default function InputPeriodoTrabalho({
             if (erro) setErro("");
           }}
           onBlur={handleBlur}
-          className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 bg-(--c01)
+          className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 bg-(--c01) w-100%
             ${
               erro
                 ? "border border-red-500 focus:ring-red-500"
@@ -70,7 +70,7 @@ export default function InputPeriodoTrabalho({
             if (erro) setErro("");
           }}
           onBlur={handleBlur}
-          className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 bg-(--c01)
+          className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 bg-(--c01) w-100%
             ${
               erro
                 ? "border border-red-500 focus:ring-red-500"

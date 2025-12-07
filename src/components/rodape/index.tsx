@@ -36,7 +36,10 @@ export default function Rodape() {
                 <hr className="border-gray-700" />
               </li>
               <li>
-                <a href="https://www.instagram.com/fatecatibaia/" target="_blank">
+                <a
+                  href="https://www.instagram.com/fatecatibaia/"
+                  target="_blank"
+                >
                   <Image
                     src="/instagram-white.svg"
                     width={25.6}

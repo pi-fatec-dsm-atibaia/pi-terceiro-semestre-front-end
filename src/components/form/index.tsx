@@ -5,9 +5,12 @@ interface FormProps {
 
 export default function Form({ children, onSubmit }: FormProps) {
   return (
-    <div className="bg-white rounded-2xl flex overflow-hidden mx-auto w-screen sm:w-[80%] h-[650px] shadow relative ">
+    <div
+      className="bg-white rounded-2xl flex flex-col sm:flex-row md:overflow-hidden mx-auto w-full max-w-[1200px] md:w-[80%] sm:h-screen sm:min-h-[55vh] sm:max-h-[70vh]
+ shadow relative max-sm:overflow-auto"
+    >
       {/* Lado Esquerdo */}
-      <div className="w-0 sm:w-1/2">
+      <div className="max-md:hidden md:w-2/5">
         <img
           src="/images/ciemIII.jpeg"
           alt="Fatec Atibaia"
@@ -16,8 +19,11 @@ export default function Form({ children, onSubmit }: FormProps) {
       </div>
 
       {/* Lado Direito */}
-      <div className="sm:w-1/2 p-1 mx-auto">
-        <form onSubmit={onSubmit} className="items-center p-1.5 sm:p-6">
+      <div className="w-full md:w-3/5 p-1 mx-auto md:overflow-y-auto flex items-center justify-center">
+        <form
+          onSubmit={onSubmit}
+          className="space-y-3 mx-auto flex flex-col items-center"
+        >
           {children}
         </form>
       </div>
@@ -25,7 +31,7 @@ export default function Form({ children, onSubmit }: FormProps) {
       <img
         src="/images/PontosTL.png"
         alt="Fatec Atibaia"
-        className="w-[5%] sm:w-[2%] max-w-[30px] absolute bottom-4 right-4"
+        className="w-[5%] md:w-[2%] max-w-[30px] absolute bottom-4 right-4"
       />
     </div>
   );
