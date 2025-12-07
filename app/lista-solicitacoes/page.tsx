@@ -13,13 +13,13 @@ type Solicitacao = {
   status: string;
 };
 
-export default function MinhasSolicitacoes() {
+export default function SolicitacoesList() {
   
-  const id = localStorage.getItem("id_");
+  const id = localStorage.getItem("id_curso");
   const [solicitacoes, setSolicicoes] = useState<Solicitacao[]>([]);
   const [loading, setLoading] = useState(true);
   const API_URL = process.env.NEXT_PUBLIC_URL_BACK_END;
-
+  
   useEffect(() => {
     async function fetchData() {
 
@@ -30,7 +30,7 @@ export default function MinhasSolicitacoes() {
           setLoading(false);
           return;
         }
-        const resp = await fetch(`${API_URL}/api/request/student/${id}`);
+        const resp = await fetch(`${API_URL}/api/request/course/${id}`);
         const data = await resp.json();
 
         const solicit: Solicitacao[] = data.data.map((item: any) => ({

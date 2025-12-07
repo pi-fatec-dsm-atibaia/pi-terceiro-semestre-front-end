@@ -16,6 +16,8 @@ import { useEffect, useState } from "react";
 
 type Curso = {
   id: number;
+  periodo: string;
+  semestre: string;
   codigo: string;
 }
 
@@ -86,7 +88,7 @@ export default function CadastroAluno() {
           <RedMarker />
           <h3 className="font-bold">Faça seu Cadastro</h3>
         </div>
-        <div className="space-y-[40px]">
+        <div className="space-y-10">
           <div className="space-x-3 grid sm:grid-cols-3 gap-3">
             <div>
               <LabelForm>Nome:</LabelForm>
@@ -131,13 +133,21 @@ export default function CadastroAluno() {
             <div>
               <LabelForm>Periodo:</LabelForm>
               <SelectForm id="periodo">
-                <option value="">Escolha</option>
+                {cursos.map((curso) => (
+                  <option key={curso.id} value={curso.id}>
+                    {curso.periodo}
+                  </option>
+                ))}
               </SelectForm>
             </div>
             <div>
               <LabelForm>Semestre:</LabelForm>
               <SelectForm id="semestre">
-                <option value="">Escolha</option>
+                {cursos.map((curso) => (
+                  <option key={curso.id} value={curso.id}>
+                    {curso.semestre}
+                  </option>
+                ))}
               </SelectForm>
             </div>
           </div>

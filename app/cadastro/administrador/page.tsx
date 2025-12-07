@@ -67,7 +67,7 @@ export default function CadastroAdm() {
             <RedMarker />
             <h3 className="font-bold">Dados do Administrador</h3>
           </div>
-          <div className="space-y-[40px]">
+          <div className="space-y-10">
             <div className="space-x-3 grid sm:grid-cols-2 gap-3">
               <div>
                 <LabelForm>Nome:</LabelForm>

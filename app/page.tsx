@@ -53,11 +53,25 @@ export default function Login() {
         
         if (response.ok) {
           localStorage.setItem("id_",result.data.id);
+
           if (route.role === "aluno") {
             router.push("/dashboard-aluno");
           }
           if (route.role === "orientador") {
-            setMensagem("Logando como orientador");
+
+            const id_curso = await fetch(`${API_URL}/api/link/advisorToCourse/{idOrientador}`,{
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+
+            const result2 = await response.json();
+            if (response.ok){
+              localStorage.setItem("id_curso",result2.data.idCurso);
+            } else {
+              console.error("ID de curso não identificado")
+            }
+            router.push("/lista-solicitacoes");
           }
           if (route.role === "administrador") {
             setMensagem("Logando como administrador");
