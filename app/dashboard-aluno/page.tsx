@@ -11,14 +11,14 @@ export default function DashBoardAluno() {
           {/*SOLICITAR*/}
           <Link
             href="./equivalencias"
-            className="h-[200px] sm:h-[500px] sm:w-[100%] max-w-[350px]"
+            className="h-[200px] sm:h-[500px] sm:w-full max-w-[350px]"
           >
-            <div className="relative h-[200px] sm:h-[500px] sm:w-[100%] max-w-[350px] justify-center max-sm:ml-auto max-sm:mr-auto bg-white max-sm:flex border-4 border-dashed grid">
+            <div className="relative h-[200px] sm:h-[500px] sm:w-full max-w-[350px] justify-center max-sm:ml-auto max-sm:mr-auto bg-white max-sm:flex border-4 border-dashed grid">
               
               <img
                 src="/images/iconeSolicitarEquivalencia.png"
                 alt=""
-                className="max-sm:size-[100px] size-[192px] mt-[10px] place-self-center"
+                className="max-sm:size-[100px] size-48 mt-2.5 place-self-center"
               />
               <div className="z-10 sm:mt-[30px] place-self-center text-center ">
                 <strong className="sm:text-4xl text-2xl">Solicitar</strong>
@@ -37,13 +37,13 @@ export default function DashBoardAluno() {
           {/*ACOMPANHAR*/}
           <Link
             href="./minhas-solicitacoes"
-            className="h-[200px] sm:h-[500px] sm:w-[100%] max-w-[350px]"
+            className="h-[200px] sm:h-[500px] sm:w-full max-w-[350px]"
           >
-            <div className="relative h-[200px] sm:h-[500px] sm:w-[100%] max-w-[350px] justify-center max-sm:ml-auto max-sm:mr-auto bg-white max-sm:flex border-4 border-dashed grid">
+            <div className="relative h-[200px] sm:h-[500px] sm:w-full max-w-[350px] justify-center max-sm:ml-auto max-sm:mr-auto bg-white max-sm:flex border-4 border-dashed grid">
               <img
                 src="/images/iconeConsultarEquivalencia.png"
                 alt=""
-                className="max-sm:size-[100px] size-[192px] mt-[10px] place-self-center"
+                className="max-sm:size-[100px] size-48 mt-2.5 place-self-center"
               />
               <div className="z-10 sm:mt-[30px] place-self-center text-center ">
                 <strong className="sm:text-4xl text-2xl">Acompanhar</strong>

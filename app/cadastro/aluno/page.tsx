@@ -12,10 +12,28 @@ import { LabelForm } from "@/src/components/labelForm";
 import RedMarker from "@/src/components/redMarker";
 import { SelectForm } from "@/src/components/selectForm";
 import { Title1 } from "@/src/components/titles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+type Curso = {
+  id: number;
+  periodo: string;
+  semestre: string;
+  codigo: string;
+}
 
 export default function CadastroAluno() {
   const [mensagem, setMensagem] = useState("");
+  const [cursos, setCursos] = useState<Curso[]>([]);
+  const API_URL = process.env.NEXT_PUBLIC_URL_BACK_END;
+
+  useEffect(() => {
+    async function buscarCursos() {
+      const response = await fetch(`${API_URL}/api/courses`);
+      const data = await response.json();
+      setCursos(data);
+    }
+    buscarCursos();
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -27,7 +45,7 @@ export default function CadastroAluno() {
       cpf: (document.getElementById("cpf") as HTMLInputElement).value,
       rg: (document.getElementById("rg") as HTMLInputElement).value,
       ra: (document.getElementById("ra") as HTMLInputElement).value,
-      curso: (document.getElementById("curso") as HTMLSelectElement).value,
+      idCurso: (document.getElementById("curso") as HTMLSelectElement).value,
       periodo: (document.getElementById("periodo") as HTMLSelectElement).value,
       semestre: (document.getElementById("semestre") as HTMLSelectElement)
         .value,
@@ -43,7 +61,7 @@ export default function CadastroAluno() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/students", {
+      const response = await fetch(`${API_URL}/api/students`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -70,7 +88,7 @@ export default function CadastroAluno() {
           <RedMarker />
           <h3 className="font-bold">Faça seu Cadastro</h3>
         </div>
-        <div className="space-y-[40px]">
+        <div className="space-y-10">
           <div className="space-x-3 grid sm:grid-cols-3 gap-3">
             <div>
               <LabelForm>Nome:</LabelForm>
@@ -105,33 +123,41 @@ export default function CadastroAluno() {
             <div>
               <LabelForm>Curso:</LabelForm>
               <SelectForm id="curso">
-                <option value="" selected disabled></option>
-                <option value="dsm">DSM</option>
+                <option value="1">DSM</option>
+                {/* {cursos.map((curso) => (
+                  <option key={curso.id} value={curso.id}>
+                    {curso.codigo}
+                  </option>
+                ))} */}
               </SelectForm>
             </div>
             <div>
               <LabelForm>Periodo:</LabelForm>
               <SelectForm id="periodo">
-                <option value="" selected disabled>
-                  Escolha
-                </option>
                 <option value="matutino">Matutino</option>
                 <option value="vespertino">Vespertino</option>
                 <option value="noturno">Noturno</option>
+                {/* {cursos.map((curso) => (
+                  <option key={curso.id} value={curso.id}>
+                    {curso.periodo}
+                  </option>
+                ))} */}
               </SelectForm>
             </div>
             <div>
               <LabelForm>Semestre:</LabelForm>
               <SelectForm id="semestre">
-                <option value="" selected disabled>
-                  Escolha
-                </option>
                 <option value="1">1° Semestre</option>
                 <option value="2">2° Semestre</option>
                 <option value="3">3° Semestre</option>
                 <option value="4">4° Semestre</option>
                 <option value="5">5° Semestre</option>
                 <option value="6">6° Semestre</option>
+                {/* {cursos.map((curso) => (
+                  <option key={curso.id} value={curso.id}>
+                    {curso.semestre}
+                  </option>
+                ))} */}
               </SelectForm>
             </div>
           </div>
