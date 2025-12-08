@@ -45,7 +45,7 @@ export default function CadastroAluno() {
       cpf: (document.getElementById("cpf") as HTMLInputElement).value,
       rg: (document.getElementById("rg") as HTMLInputElement).value,
       ra: (document.getElementById("ra") as HTMLInputElement).value,
-      curso: (document.getElementById("curso") as HTMLSelectElement).value,
+      idCurso: (document.getElementById("curso") as HTMLSelectElement).value,
       periodo: (document.getElementById("periodo") as HTMLSelectElement).value,
       semestre: (document.getElementById("semestre") as HTMLSelectElement)
         .value,
@@ -123,31 +123,41 @@ export default function CadastroAluno() {
             <div>
               <LabelForm>Curso:</LabelForm>
               <SelectForm id="curso">
-                {cursos.map((curso) => (
+                <option value="1">DSM</option>
+                {/* {cursos.map((curso) => (
                   <option key={curso.id} value={curso.id}>
                     {curso.codigo}
                   </option>
-                ))}
+                ))} */}
               </SelectForm>
             </div>
             <div>
               <LabelForm>Periodo:</LabelForm>
               <SelectForm id="periodo">
-                {cursos.map((curso) => (
+                <option value="matutino">Matutino</option>
+                <option value="vespertino">Vespertino</option>
+                <option value="noturno">Noturno</option>
+                {/* {cursos.map((curso) => (
                   <option key={curso.id} value={curso.id}>
                     {curso.periodo}
                   </option>
-                ))}
+                ))} */}
               </SelectForm>
             </div>
             <div>
               <LabelForm>Semestre:</LabelForm>
               <SelectForm id="semestre">
-                {cursos.map((curso) => (
+                <option value="1">1° Semestre</option>
+                <option value="2">2° Semestre</option>
+                <option value="3">3° Semestre</option>
+                <option value="4">4° Semestre</option>
+                <option value="5">5° Semestre</option>
+                <option value="6">6° Semestre</option>
+                {/* {cursos.map((curso) => (
                   <option key={curso.id} value={curso.id}>
                     {curso.semestre}
                   </option>
-                ))}
+                ))} */}
               </SelectForm>
             </div>
           </div>

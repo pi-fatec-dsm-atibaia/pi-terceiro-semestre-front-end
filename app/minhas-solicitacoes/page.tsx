@@ -38,9 +38,9 @@ export default function MinhasSolicitacoes() {
           dtSolicitacao: item.dtSolicitacao,
           protocolo: item.protocolo,
           tipoEquivalencia: item.equivalencia.tipoEquivalencia,
-          curso: item.aluno?.curso?.codigo ?? "—",
-          semestre: item.aluno?.curso?.quantSemestre
-            ? `${item.aluno.curso.quantSemestre}º`
+          curso: item.aluno?.curso?.codigo,
+          semestre: item.aluno?.quantSemestre
+            ? `${item.aluno.quantSemestre}º semestre`
             : "—",
           status: item.statusSolicitacao ?? "Em análise",
         }));
@@ -66,8 +66,8 @@ export default function MinhasSolicitacoes() {
         {solicitacoes.map((item) => (
           <SolicitacaoCard
             key={item.id}
-            data={item.dtSolicitacao}
             protocolo={item.protocolo}
+            data={item.dtSolicitacao}
             tipo={item.tipoEquivalencia}
             curso={item.curso}
             semestre={item.semestre}

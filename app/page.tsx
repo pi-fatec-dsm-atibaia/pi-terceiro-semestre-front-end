@@ -50,7 +50,8 @@ export default function Login() {
         });
 
         const result = await response.json();
-        
+
+        console.log(result)
         if (response.ok) {
           localStorage.setItem("id_",result.data.id);
 
@@ -59,18 +60,18 @@ export default function Login() {
           }
           if (route.role === "orientador") {
 
-            const id_curso = await fetch(`${API_URL}/api/link/advisorToCourse/{idOrientador}`,{
-              method: "GET",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-            });
+            // const id_curso = await fetch(`${API_URL}/api/link/advisorToCourse/{idOrientador}`,{
+            //   method: "GET",
+            //   headers: { "Content-Type": "application/json" },
+            //   body: JSON.stringify(data),
+            // });
 
-            const result2 = await response.json();
-            if (response.ok){
-              localStorage.setItem("id_curso",result2.data.idCurso);
-            } else {
-              console.error("ID de curso não identificado")
-            }
+            // const result2 = await response.json();
+            // if (response.ok){
+            //   localStorage.setItem("id_curso",result2.data.idCurso);
+            // } else {
+            //   console.error("ID de curso não identificado")
+            // }
             router.push("/lista-solicitacoes");
           }
           if (route.role === "administrador") {

@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { X, CheckCircle, UploadCloud, ChevronDown } from "lucide-react";
 import InputTextForm from "../inputTextForm";
+import InputEmailForm from "../inputEmailForm";
 
 // ===============================================
 // 1. Tipos de Dados e Mapeamento
@@ -54,12 +55,12 @@ interface FormState {
   razaoSocial: string,
   endereco: string,
 
-  area: string,
-  sessao: string,
+  // area: string,
+  // sessao: string,
+  // adicionarSessao: string,
   periodo: string,
   termos: string,
   aceitoTermos: boolean,
-  adicionarSessao: string,
 }
 
 // Estado para o controle dos arquivos (Documentos)
@@ -211,12 +212,12 @@ export default function EquivalenciaForm() {
     site: "",
     razaoSocial: "",
     endereco: "",
-    area: "",
-    sessao: "",
+    // area: "",
+    // sessao: "",
+    // adicionarSessao: "",
     periodo: "",
     termos: "",
     aceitoTermos: false,
-    adicionarSessao: "",
   });
 
   // NOVO ESTADO: Armazena os arquivos (File objects)
@@ -275,8 +276,7 @@ export default function EquivalenciaForm() {
         formData.cnpj = "";
       }
 
-      // 4. Garantir que localStorage é number (se não for, conventer)
-      // formData.idAluno = localStorage.???
+      formData.idAluno = Number(localStorage.getItem("id_"));
 
       // 1. Validação dos termos
       if (!formData.aceitoTermos) {
@@ -376,7 +376,7 @@ export default function EquivalenciaForm() {
         className="flex flex-col md:flex-row max-w-6xl w-full shadow-2xl overflow-hidden rounded-xl bg-white md:min-h-[600px] min-h-0 h-full mx-auto"
       >
         {/* BLOCO ESQUERDO (Documentação): Design Dark */}
-        <div className="md:w-1/2 w-full p-6 md:p-10 bg-black text-white flex flex-col min-h-[450px] md:min-h-full">
+        <div className="md:w-1/2 h-200 w-full p-6 md:p-10 bg-black text-white flex flex-col min-h-[450px] md:min-h-full">
           <h3 className="border-l-4 border-red-600 text-sm font-semibold mb-2 text-white uppercase pl-3">
             Tipo de Equivalência
           </h3>
@@ -404,7 +404,7 @@ export default function EquivalenciaForm() {
           </h3>
 
           {/* Div que controla o SCROLL para o conteúdo variável */}
-          <div className="flex-grow overflow-y-auto space-y-3 mb-6 pr-1">
+          <div className="flex-grow space-y-3 mb-6 pr-1">
             {documentosObrigatorios.map((documento) => (
               <DocumentUploadItem
                 key={documento}
@@ -413,23 +413,112 @@ export default function EquivalenciaForm() {
                 onFileSelect={handleFileChange} // Usando o novo handler
               />
             ))}
-
           </div>
-          {/* 2. Adicionar campos comuns */}
 
-            <InputTextForm id="" />
+          <h3 className="border-l-4 border-red-600 text-sm font-semibold mb-2 text-white uppercase pl-3">
+            Dados gerais
+          </h3>
+          <div className="flex-grow space-y-3 mb-6 pr-1">
+            {/* 2. Adicionar campos comuns */}
+            <input 
+              id="departamento" placeholder="Digite seu cargo" 
+              name="departamento"
+              value={formData.departamento}
+              onChange={handleChange}
+              className="font-semibold text-black focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)"
+            />
+            <input 
+              id="funcao" placeholder="Digite sua função exercida" 
+              name="funcao"
+              value={formData.funcao}
+              onChange={handleChange}
+              className="font-semibold text-black focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)"
+            />
+            <input 
+              id="periodoDeTrabalho" placeholder="Periodo de trabalho" 
+              name="periodoTrabalho"
+              value={formData.periodoTrabalho}
+              onChange={handleChange}
+              className="font-semibold text-black focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)"
+            />
+          </div>
+          
 
           {
             formData.tipoEquivalencia === "CTPS" && (
               <>
               {/* 2. Adiciona campos exclusivos de CTPS */}
+              <h3 className="border-l-4 border-red-600 text-sm font-semibold mb-2 text-white uppercase pl-3">
+                Dados CPTS
+              </h3>
+              <div className="flex-grow overflow-y-auto overflow-hidden space-y-3 mb-6 pr-1">
                 <input
                   id="cnpj"
                   name="cnpj"
                   value={formData.cnpj}
+                  placeholder="Digite o CNPJ da empresa"
                   onChange={handleChange}
-                  className="w-full p-4 mb-4 border border-gray-300 bg-gray-50 resize-none text-sm text-gray-700 flex-grow rounded-lg transition"
+                  className="font-semibold text-black focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)"
                 />
+                <input
+                  id="site"
+                  name="site"
+                  value={formData.site}
+                  placeholder="Digite o site da empresa"
+                  onChange={handleChange}
+                  className="font-semibold text-black focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)"
+                />
+                <input
+                  id="razaoSocial"
+                  name="razaoSocial"
+                  value={formData.razaoSocial}
+                  placeholder="Digite a razão social da empresa"
+                  onChange={handleChange}
+                  className="font-semibold text-black focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)"
+                />
+                <input
+                  id="endereco"
+                  name="endereco"
+                  value={formData.endereco}
+                  placeholder="Digite o endereço da empresa"
+                  onChange={handleChange}
+                  className="font-semibold text-black focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)"
+                />
+                <input
+                  id="empregadorNome"
+                  name="empregadorNome"
+                  value={formData.empregadorNome}
+                  placeholder="Digite o nome do empregador"
+                  onChange={handleChange}
+                  className="font-semibold text-black focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)"
+                />
+                <input
+                  id="empregadorEmail"
+                  name="empregadorEmail"
+                  value={formData.empregadorEmail}
+                  placeholder="Digite o email do empregador"
+                  onChange={handleChange}
+                  className="font-semibold text-black focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)"
+                />
+                <input
+                  id="empregadorRg"
+                  name="empregadorRg"
+                  value={formData.empregadorRg}
+                  placeholder="Digite o RG do empregador"
+                  onChange={handleChange}
+                  className="font-semibold text-black focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)"
+                />
+                <input
+                  id="empregadorCargo"
+                  name="empregadorCargo"
+                  value={formData.empregadorCargo}
+                  placeholder="Digite o cargo do empregador"
+                  onChange={handleChange}
+                  className="font-semibold text-black focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)"
+                />
+                
+
+              </div>
               </>
             )
           }
@@ -446,11 +535,11 @@ export default function EquivalenciaForm() {
             Termos
           </label>
 
-          <textarea
-            id="termos"
-            name="termos"
+          <textarea // Não terá esse campo de texto no futuro
+            id="observacao"
+            name="observacao"
             placeholder="Eu (seu nome) declaro para os devidos fins que todas as informações e documentos anexados são autênticos e verdadeiros, e concordo com os termos e condições de processamento de equivalência."
-            value={formData.termos}
+            value={formData.observacao} 
             onChange={handleChange}
             rows={8} // Ajuste de linhas para melhor visualização em mobile
             className="w-full p-4 mb-4 border border-gray-300 bg-gray-50 resize-none text-sm text-gray-700 flex-grow rounded-lg transition"
