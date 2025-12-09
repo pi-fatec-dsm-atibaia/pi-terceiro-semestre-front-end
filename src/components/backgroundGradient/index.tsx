@@ -10,18 +10,18 @@ export default function BackgroundGradient({
         <img
           src="/images/PontosBL.png"
           alt="Fatec Atibaia"
-          className="w-[5%] sm:w-[40px] absolute top-4 right-4"
+          className="w-[5%] sm:w-10 absolute top-4 right-4"
         />
         <img
           src="/images/PontosTR.png"
           alt="Fatec Atibaia"
-          className="w-[5%] sm:w-[40px] absolute bottom-4 left-4"
+          className="w-[5%] sm:w-10 absolute bottom-4 left-4"
         />
       </div>
       <img
         src="/images/PontosBR.png"
         alt="Fatec Atibaia"
-        className="w-0 sm:w-[40px] absolute botom-24 right-24"
+        className="w-0 sm:w-10 absolute botom-24 right-24"
       />
 
       {/*Formulario*/}

@@ -1,149 +1,233 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
+// Seus Componentes
 import BackgroundGradient from "@/src/components/backgroundGradient";
 import { ButtonSubmitForm } from "@/src/components/buttonSubmitForm";
 import Form from "@/src/components/form";
-import InputEmailForm from "@/src/components/inputEmailForm";
-import InputPasswordForm from "@/src/components/inputPasswordForm";
-import InputTextForm from "@/src/components/inputTextForm";
+import InputTextForm from "@/src/components/inputTextForm"; 
 import { LabelForm } from "@/src/components/labelForm";
 import RedMarker from "@/src/components/redMarker";
 import { SelectForm } from "@/src/components/selectForm";
 import { Title1 } from "@/src/components/titles";
-import { useState } from "react";
 
-export default function CadastroAluno() {
-  const [mensagem, setMensagem] = useState("");
+const API_BASE = "http://localhost:3000";
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+// Tipagem
+interface Advisor {
+  nome: string;
+  email: string;
+  [key: string]: any; 
+}
 
-    const data = {
-      nome: (document.getElementById("nome") as HTMLInputElement).value,
-      email: (document.getElementById("email") as HTMLInputElement).value,
-      telefone: (document.getElementById("telefone") as HTMLInputElement).value,
-      cpf: (document.getElementById("cpf") as HTMLInputElement).value,
-      rg: (document.getElementById("rg") as HTMLInputElement).value,
-      ra: (document.getElementById("ra") as HTMLInputElement).value,
-      curso: (document.getElementById("curso") as HTMLSelectElement).value,
-      periodo: (document.getElementById("periodo") as HTMLSelectElement).value,
-      semestre: (document.getElementById("semestre") as HTMLSelectElement)
-        .value,
-      senha: (document.getElementById("senha") as HTMLInputElement).value,
-      confirmSenha: (
-        document.getElementById("confirmSenha") as HTMLInputElement
-      ).value,
+interface Course {
+  id: number;
+  nome: string;
+  codigo: string;
+}
+
+export default function AdvisorLinker() {
+  // --- Estados apenas para exibir/ocultar elementos e guardar dados da API ---
+  const [advisor, setAdvisor] = useState<Advisor | null>(null);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [mensagem, setMensagem] = useState<{ text: string, type: 'success' | 'error' } | null>(null);
+
+  // 1. Carregar Cursos ao iniciar
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/courses`);
+        if (res.ok) {
+          const data = await res.json();
+          // Lógica de "Caça ao Array" (igual a anterior)
+          let lista: Course[] = [];
+          if (Array.isArray(data)) lista = data;
+          else if (Array.isArray(data.data)) lista = data.data;
+          else if (Array.isArray(data.courses)) lista = data.courses;
+          else if (Array.isArray(data.result)) lista = data.result;
+          setCourses(lista);
+        }
+      } catch (error) {
+        console.error("Erro cursos:", error);
+      }
     };
+    fetchCourses();
+  }, []);
 
-    if (data.senha !== data.confirmSenha) {
-      setMensagem("As senhas não coincidem.");
+  // 2. Buscar Orientador (Usando getElementById igual ao seu exemplo)
+  const handleSearchAdvisor = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    setLoading(true);
+    setMensagem(null);
+    setAdvisor(null);
+
+    // PEGA O VALOR DIRETO DO DOM
+    const idInput = document.getElementById("searchId") as HTMLInputElement;
+    const idValue = idInput?.value;
+
+    if (!idValue) {
+      setMensagem({ type: 'error', text: "Digite o ID do orientador." });
+      setLoading(false);
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/students", {
+      const res = await fetch(`${API_BASE}/api/advisors/${idValue}`);
+      if (res.status === 200) {
+        const data = await res.json();
+        
+        // Lógica de "Caça ao Objeto"
+        let found: Advisor | null = null;
+        if (data.nome) found = data;
+        else if (data.data?.nome) found = data.data;
+        else if (data.advisor?.nome) found = data.advisor;
+        else if (Array.isArray(data) && data[0]) found = data[0];
+
+        if (found) setAdvisor(found);
+        else setMensagem({ type: 'error', text: "Dados ilegíveis." });
+
+      } else {
+        setMensagem({ type: 'error', text: "Orientador não encontrado." });
+      }
+    } catch (error) {
+      setMensagem({ type: 'error', text: "Erro de conexão." });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 3. Salvar Vínculo
+  const handleLinkSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // PEGA OS VALORES DIRETO DO DOM (Igual ao seu CadastroAluno)
+    const searchIdInput = document.getElementById("searchId") as HTMLInputElement;
+    const cursoInput = document.getElementById("cursoSelect") as HTMLSelectElement;
+    const dtInicioInput = document.getElementById("dtInicio") as HTMLInputElement;
+    const dtFimInput = document.getElementById("dtFim") as HTMLInputElement;
+
+    const dados = {
+        idOrientador: searchIdInput?.value,
+        idCurso: cursoInput?.value,
+        dtInicio: dtInicioInput?.value,
+        dtFim: dtFimInput?.value
+    };
+
+    if (!dados.idCurso || !dados.dtInicio || !dados.dtFim || !dados.idOrientador) {
+      setMensagem({ type: 'error', text: "Preencha todos os campos." });
+      return;
+    }
+
+    const payload = {
+      idCurso: Number(dados.idCurso),
+      dtInicio: dados.dtInicio,
+      dtFim: dados.dtFim,
+      idOrientador: Number(dados.idOrientador)
+    };
+
+    try {
+      setLoading(true);
+      const res = await fetch(`${API_BASE}/api/link/advisorToCourse`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
 
-      const result = await response.json();
-
-      if (response.ok) {
-        setMensagem("Aluno cadastrado com sucesso!");
+      if (res.ok) {
+        setMensagem({ type: 'success', text: "Vínculo realizado com sucesso!" });
+        // Limpar campos manualmente
+        if(cursoInput) cursoInput.value = "";
+        if(dtInicioInput) dtInicioInput.value = "";
+        if(dtFimInput) dtFimInput.value = "";
       } else {
-        setMensagem(result.message || "Erro ao cadastrar.");
+        const errorData = await res.json().catch(() => ({}));
+        setMensagem({ type: 'error', text: errorData.message || "Erro ao vincular." });
       }
-    } catch (err) {
-      setMensagem("Falha na comunicação com o servidor.");
+    } catch (error) {
+      setMensagem({ type: 'error', text: "Erro de comunicação." });
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <BackgroundGradient>
-      <Title1>Cadastro de alunos!</Title1>
-      <Form onSubmit={handleSubmit}>
-        <RedMarker>Faça seu cadastro</RedMarker>
-        <div className="space-x-3 space-y-3 grid sm:grid-cols-3 grid-cols-2 gap-3 w-[90%]">
-          <div>
-            <LabelForm>Nome:</LabelForm>
-            <InputTextForm id="nome" placeholder="Digite seu nome" />
-          </div>
-          <div>
-            <LabelForm>Email:</LabelForm>
-            <InputEmailForm id="email" placeholder="Informe o seu e-mail" />
-          </div>
-          <div>
-            <LabelForm>Telefone:</LabelForm>
-            <InputTextForm id="telefone" placeholder="Digite seu telefone" />
-          </div>
+      <Title1>Gestão de Vínculos</Title1>
 
-          <div>
-            <LabelForm>CPF:</LabelForm>
-            <InputTextForm id="cpf" placeholder="Digite seu CPF" />
+      {/* --- BLOCO DE BUSCA --- */}
+      <div className="w-[90%] mx-auto bg-white/50 p-4 rounded-lg mb-6 backdrop-blur-sm">
+        <RedMarker>1. Buscar Orientador</RedMarker>
+        <div className="flex items-end gap-4 mt-4">
+          <div className="flex-1">
+            <LabelForm>ID do Orientador:</LabelForm>
+            {/* Removi value/onChange, deixei apenas o ID */}
+            <InputTextForm id="searchId" placeholder="Ex: 1" />
           </div>
-          <div>
-            <LabelForm>RG:</LabelForm>
-            <InputTextForm id="rg" placeholder="Digite seu RG" />
-          </div>
-          <div>
-            <LabelForm>RA:</LabelForm>
-            <InputTextForm id="ra" placeholder="Digite seu RA" />
-          </div>
-
-          <div>
-            <LabelForm>Curso:</LabelForm>
-            <SelectForm id="curso">
-              <option value="" selected disabled></option>
-              <option value="dsm">DSM</option>
-            </SelectForm>
-          </div>
-          <div>
-            <LabelForm>Periodo:</LabelForm>
-            <SelectForm id="periodo">
-              <option value="" selected disabled>
-                Escolha
-              </option>
-              <option value="matutino">Matutino</option>
-              <option value="vespertino">Vespertino</option>
-              <option value="noturno">Noturno</option>
-            </SelectForm>
-          </div>
-          <div>
-            <LabelForm>Semestre:</LabelForm>
-            <SelectForm id="semestre">
-              <option value="" selected disabled>
-                Escolha
-              </option>
-              <option value="1">1° Semestre</option>
-              <option value="2">2° Semestre</option>
-              <option value="3">3° Semestre</option>
-              <option value="4">4° Semestre</option>
-              <option value="5">5° Semestre</option>
-              <option value="6">6° Semestre</option>
-            </SelectForm>
-          </div>
+          <button 
+            onClick={handleSearchAdvisor}
+            disabled={loading}
+            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded h-[45px] transition-colors"
+          >
+            {loading ? "..." : "Buscar"}
+          </button>
         </div>
+      </div>
 
-        <div className="mt-3 space-x-3 space-y-[20px] grid grid-cols-2 gap-3 w-[90%]">
-          <div>
-            <LabelForm>Senha:</LabelForm>
-            <InputPasswordForm id="senha" placeholder="Digite uma senha" />
-          </div>
-          <div>
-            <LabelForm>Confirme sua senha:</LabelForm>
-            <InputPasswordForm
-              id="confirmSenha"
-              placeholder="Confirme a senha digitada"
-            />
-          </div>
-        </div>
-        <ButtonSubmitForm>Cadastrar</ButtonSubmitForm>
+      {/* --- MENSAGENS (Exibe erro ou sucesso) --- */}
+      {mensagem && (
+         <div className={`mb-4 w-[90%] mx-auto p-3 text-center font-bold rounded ${mensagem.type === 'error' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600'}`}>
+            {mensagem.text}
+         </div>
+      )}
 
-        {mensagem && (
-          <p className="text-center mt-3 font-bold text-red-500">{mensagem}</p>
-        )}
-      </Form>
+      {/* --- FORMULÁRIO DE VÍNCULO (Só aparece se advisor existir) --- */}
+      {advisor && (
+        <Form onSubmit={handleLinkSubmit}>
+          <RedMarker>2. Vincular ao Curso</RedMarker>
+          
+          <div className="bg-gray-100 p-4 rounded mb-4 border-l-4 border-red-500">
+            <p className="text-gray-700"><strong>Nome:</strong> {advisor.nome}</p>
+            <p className="text-gray-700"><strong>Email:</strong> {advisor.email}</p>
+          </div>
+
+          <div className="space-y-3 grid gap-3 w-[90%]">
+            
+            <div>
+              <LabelForm>Curso:</LabelForm>
+              {/* Removi onChange, deixei apenas ID */}
+              <SelectForm id="cursoSelect">
+                <option value="" disabled selected>Selecione um curso...</option>
+                {courses.map((c) => (
+                    <option key={c.id} value={c.id}>
+                        {c.nome} - {c.codigo}
+                    </option>
+                ))}
+              </SelectForm>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <LabelForm>Data Início:</LabelForm>
+                {/* Se seu InputTextForm não aceitar type="date", troque por <input type="date" ... /> padrão do HTML */}
+                <InputTextForm id="dtInicio" placeholder="YYYY-MM-DD" /> 
+              </div>
+              <div>
+                <LabelForm>Data Fim:</LabelForm>
+                <InputTextForm id="dtFim" placeholder="YYYY-MM-DD" />
+              </div>
+            </div>
+
+          </div>
+
+          <div className="mt-6 w-[90%]">
+             <ButtonSubmitForm>Confirmar Vínculo</ButtonSubmitForm>
+          </div>
+
+        </Form>
+      )}
+
     </BackgroundGradient>
   );
 }
