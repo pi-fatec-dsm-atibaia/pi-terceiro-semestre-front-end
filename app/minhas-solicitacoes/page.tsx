@@ -64,7 +64,8 @@ export default function MinhasSolicitacoes() {
     <div className="min-h-screen bg-[#f2f2f2] flex justify-center py-10">
       <div className="w-[95%] md:w-[80%] flex flex-col gap-4">
         {solicitacoes.map((item) => (
-          <SolicitacaoCard
+          <SolicitacaoCard 
+            link="minhas-solicitacoes/solicitacao/"
             key={item.id}
             protocolo={item.protocolo}
             data={item.dtSolicitacao}

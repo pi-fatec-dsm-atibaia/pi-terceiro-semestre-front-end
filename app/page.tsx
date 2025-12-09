@@ -13,109 +13,92 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface LoginRoute {
-  url: string;
-  role: string;
+    url: string;
+    role: string;
 }
 
 export default function Login() {
-  const [mensagem, setMensagem] = useState("");
-  const router = useRouter();
-  const API_URL = process.env.NEXT_PUBLIC_URL_BACK_END;
+    const [mensagem, setMensagem] = useState("");
+    const router = useRouter();
+    const API_URL = process.env.NEXT_PUBLIC_URL_BACK_END;
 
-  const routes: LoginRoute[] = [
-    { url: `${API_URL}/api/students/login`, role: "aluno" },
-    {
-      url: `${API_URL}/api/advisors/login-advisor`,
-      role: "orientador",
-    },
-    {
-      url: `${API_URL}/api/admins/login-admin`,
-      role: "administrador",
-    },
-  ];
+    const routes: LoginRoute[] = [
+        { url: `${API_URL}/api/students/login`, role: "aluno" },
+        { url: `${API_URL}/api/advisors/login-advisor`, role: "orientador" },
+        { url: `${API_URL}/api/admins/login-admin`, role: "administrador" },
+    ];
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+    async function handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
 
-    const data = {
-      email: (document.getElementById("email") as HTMLInputElement).value,
-      senha: (document.getElementById("senha") as HTMLInputElement).value,
-    };
-    for (const route of routes) {
-      try {
-        const response = await fetch(route.url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
+        const data = {
+            email: (document.getElementById("email") as HTMLInputElement).value,
+            senha: (document.getElementById("senha") as HTMLInputElement).value,
+        };
+        for (const route of routes) {
+            try {
+                const response = await fetch(route.url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+                const result = await response.json();
 
-        const result = await response.json();
+                console.log(result) // Somente para testes
+                
+                if (response.ok) {
+                    localStorage.setItem("id_", result.data.id);
 
-        console.log(result)
-        if (response.ok) {
-          localStorage.setItem("id_",result.data.id);
+                    if (route.role === "aluno") {
+                        router.push("/dashboard-aluno");
 
-          if (route.role === "aluno") {
-            router.push("/dashboard-aluno");
-          }
-          if (route.role === "orientador") {
+                    }else if (route.role === "orientador") {
+                        router.push("/lista-solicitacoes");
 
-            // const id_curso = await fetch(`${API_URL}/api/link/advisorToCourse/{idOrientador}`,{
-            //   method: "GET",
-            //   headers: { "Content-Type": "application/json" },
-            //   body: JSON.stringify(data),
-            // });
-
-            // const result2 = await response.json();
-            // if (response.ok){
-            //   localStorage.setItem("id_curso",result2.data.idCurso);
-            // } else {
-            //   console.error("ID de curso não identificado")
-            // }
-            router.push("/lista-solicitacoes");
-          }
-          if (route.role === "administrador") {
-            setMensagem("Logando como administrador");
-          }
-          return;
-        } else {
-          setMensagem(result.message || "Erro ao logar.");
+                    } else if (route.role === "administrador") {
+                        setMensagem("/dashboard-adm");
+                    }
+                    return;
+                }
+                 else {
+                    setMensagem(result.message || "Erro ao logar.");
+                }
+            } catch (err) {
+                setMensagem("Falha na comunicação com o servidor.");
+                return;
+            }
         }
-      } catch (err) {
-        setMensagem("Falha na comunicação com o servidor.");
-      }
     }
-  }
-  return (
-    <BackgroundGradient>
-      <Title1>Login</Title1>
-      <Form onSubmit={handleSubmit}>
-        <div className="space-y-[9%]">
-          <div className="flex">
-            <RedMarker />
-            <h3 className="font-bold">Faça seu Login</h3>
-          </div>
+    return (
+        <BackgroundGradient>
+            <Title1>Login</Title1>
+            <Form onSubmit={handleSubmit}>
+                <div className="space-y-[9%]">
+                    <div className="flex">
+                        <RedMarker />
+                        <h3 className="font-bold">Faça seu Login</h3>
+                    </div>
 
-          <div className="grid gap-3 space-y-[15%]">
-            <div>
-              <LabelForm>Email:</LabelForm>
-              <InputEmailForm id="email" placeholder="Informe o seu e-mail" />
-            </div>
-            <div>
-              <LabelForm>Senha:</LabelForm>
-              <InputPasswordForm id="senha" placeholder="Informe a sua senha" />
-            </div>
-          </div>
-          <div>
-            <ButtonSubmitForm>Entrar</ButtonSubmitForm>
-            <Exits href="/cadastro/aluno">Não possui uma conta?</Exits>
-            <Exits href="/recuperacao-senha">Esqueci minha senha</Exits>
-          </div>
-        </div>
-        {mensagem && (
-          <p className="text-center mt-3 font-bold text-red-500">{mensagem}</p>
-        )}
-      </Form>
-    </BackgroundGradient>
-  );
+                    <div className="grid gap-3 space-y-[15%]">
+                        <div>
+                            <LabelForm>Email:</LabelForm>
+                            <InputEmailForm id="email" placeholder="Informe o seu e-mail" />
+                        </div>
+                        <div>
+                            <LabelForm>Senha:</LabelForm>
+                            <InputPasswordForm id="senha" placeholder="Informe a sua senha" />
+                        </div>
+                    </div>
+                    <div>
+                        <ButtonSubmitForm>Entrar</ButtonSubmitForm>
+                        <Exits href="/cadastro/aluno">Não possui uma conta?</Exits>
+                        <Exits href="/recuperacao-senha">Esqueci minha senha</Exits>
+                    </div>
+                </div>
+                {mensagem && (
+                    <p className="text-center mt-3 font-bold text-red-500">{mensagem}</p>
+                )}
+            </Form>
+        </BackgroundGradient>
+    );
 }

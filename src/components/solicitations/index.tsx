@@ -1,19 +1,23 @@
 interface SolicitationsProps {
+  nomeAluno?: string,
   data: string;
   protocolo: string;
   tipo: string;
   curso: string;
   semestre: string;
   status: string | "Aprovado" | "Reprovado" | "Em análise";
+  link: string;
 }
 
 export default function SolicitationsCard({
+  nomeAluno,
   data,
   protocolo,
   tipo,
   curso,
   semestre,
   status,
+  link
 }: SolicitationsProps) {
   let statusColor: string;
   if (status === "Aprovado") {
@@ -43,9 +47,10 @@ export default function SolicitationsCard({
   return (
     <div className="bg-white md:px-4 h-20 md:h-[60px] flex items-center justify-between shadow-sm overscroll-auto overflow-hidden">
       <div className="w-full flex text-sm  text-gray-700 max-md:grid max-md:grid-cols-3 gap-3 text-center md:text-left items-center justify-between">
-        <a href="/minhas-solicitacoes/solicitacao" className="font-bold max-md:w-[60px] bg-gray-300 items-center md:px-3 rounded-4xl flex-none max-md:mx-auto">
+        <a href={link} className="font-bold max-md:w-[60px] bg-gray-300 items-center md:px-3 rounded-4xl flex-none max-md:mx-auto">
           ACESSAR A SOLICITAÇÃO
         </a>
+        <span>{nomeAluno}</span>
         <span>{data}</span>
         <span>{protocolo}</span>
         <span>{tipo}</span>
