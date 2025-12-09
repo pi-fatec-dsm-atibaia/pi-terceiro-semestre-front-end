@@ -18,19 +18,20 @@ export default function RecuperacaoSenha() {
 	 const [confirmAlert, setConfirmAlert] = useState(false);
 	 const [errorAlert, setErrorAlert] = useState(false);
 	 const [loading, setLoading] = useState(false)
+	 const API_URL = process.env.NEXT_PUBLIC_URL_BACK_END;
+
 	 async function handleSubmit(e: React.FormEvent) {
 	 	e.preventDefault();
 	 	setLoading(true);
 	 	setConfirmAlert(false);
 	 	setErrorAlert(false)
-	 	// REVISAR ESTADOS DE ERRO !!!!!!!!!!!!!!!!!!!! (Iago
+
 	 	try 
 	 	{
-	 		// Colocar caminho da API que fará o envio do email 
-	 		const res = await fetch("#", {
+	 		const res = await fetch(`${API_URL}/api/auth/forgot-password`, {
 	 			method: "POST",
 	 			headers: { "Content-Type": "application/json" },
-	 			body: JSON.stringify({ email }),
+	 			body: JSON.stringify({ email: email }),
 	 		})
 	 		if (!res.ok) {
 	 			setErrorAlert(true);
@@ -50,7 +51,7 @@ export default function RecuperacaoSenha() {
 			
 			 <BackgroundGradient>
 			 	<Title1>Recuperação de senha</Title1>
-			 	<Form>
+			 	<Form onSubmit={handleSubmit}>
 			 		<div className="flex">
 			 			<RedMarker />
 			 			<h3 className="font-bold">Para recuperar a sua senha, informe seu endereço de email que nós enviaremos um link para a alteração da senha</h3>

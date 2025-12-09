@@ -453,6 +453,7 @@ export default function EquivalenciaForm() {
               </h3>
               <div className="flex-grow overflow-y-auto overflow-hidden space-y-3 mb-6 pr-1">
                 <input
+                  
                   id="cnpj"
                   name="cnpj"
                   value={formData.cnpj}
@@ -547,24 +548,11 @@ export default function EquivalenciaForm() {
 
           <div className="mt-auto pt-4 border-t border-gray-100">
             <div className="flex items-center mb-6">
-              <input
-                type="checkbox"
-                name="aceitoTermos"
-                checked={formData.aceitoTermos}
-                onChange={handleChange}
-                id="aceitoTermos"
-                className="form-checkbox text-red-600 h-5 w-5 border-gray-400 rounded focus:ring-red-500"
-              />
-              <label
-                htmlFor="aceitoTermos"
-                className="ml-3 text-base text-gray-700"
-              >
-                Li e aceito os{" "}
-                <span className="text-red-600 cursor-pointer font-medium hover:text-red-700 transition">
-                  termos e condições
-                </span>
-                .
-              </label>
+              <select id="status" value="{formData.status}"> // Precisa fazer apresentar o select de status que está cadastrado
+                <option value="Em Análise">Em Análise</option>
+                <option value="Concluído">Concluído</option>
+                <option value="Cancelado">Cancelado</option>
+              </select>
             </div>
 
             <button
