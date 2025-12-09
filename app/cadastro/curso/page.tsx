@@ -53,7 +53,7 @@ export default function CadastroCurso() {
         <Title1>Cadastro de Curso</Title1>
         <Form onSubmit={handleSubmit}>
           <RedMarker>Dados do curso</RedMarker>
-          <div className="space-y-[40px]">
+          <div className="space-y-10">
             <div className="space-x-3 grid sm:grid-cols-2 gap-3">
               <div>
                 <LabelForm>Nome:</LabelForm>

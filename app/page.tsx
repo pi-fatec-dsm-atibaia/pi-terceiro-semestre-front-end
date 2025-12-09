@@ -20,17 +20,12 @@ interface LoginRoute {
 export default function Login() {
   const [mensagem, setMensagem] = useState("");
   const router = useRouter();
+  const API_URL = process.env.NEXT_PUBLIC_URL_BACK_END;
 
   const routes: LoginRoute[] = [
-    { url: "http://localhost:3000/api/students/login", role: "aluno" },
-    {
-      url: "http://localhost:3000/api/advisors/login-advisor",
-      role: "orientador",
-    },
-    {
-      url: "http://localhost:3000/api/admins/login-admin",
-      role: "administrador",
-    },
+    { url: `${API_URL}/api/students/login`, role: "aluno" },
+    { url: `${API_URL}/api/advisors/login-advisor`, role: "orientador" },
+    { url: `${API_URL}/api/admins/login-admin`, role: "administrador" },
   ];
 
   async function handleSubmit(e: React.FormEvent) {
@@ -47,18 +42,19 @@ export default function Login() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         });
-
         const result = await response.json();
 
+        console.log(result); // Somente para testes
+
         if (response.ok) {
+          localStorage.setItem("id_", result.data.id);
+
           if (route.role === "aluno") {
-            router.push("http://localhost:3001/dashboard-aluno");
-          }
-          if (route.role === "orientador") {
-            setMensagem("Logando como orientador");
-          }
-          if (route.role === "administrador") {
-            setMensagem("Logando como administrador");
+            router.push("/dashboard-aluno");
+          } else if (route.role === "orientador") {
+            router.push("/lista-solicitacoes");
+          } else if (route.role === "administrador") {
+            setMensagem("/dashboard-adm");
           }
           return;
         } else {
@@ -66,6 +62,7 @@ export default function Login() {
         }
       } catch (err) {
         setMensagem("Falha na comunicação com o servidor.");
+        return;
       }
     }
   }
@@ -76,7 +73,7 @@ export default function Login() {
         <div className="space-y-[5px]">
           <RedMarker>Faça seu Login</RedMarker>
 
-          <div className="grid gap-3 space-y-[20px]">
+          <div className="grid gap-3 space-y-5">
             <div>
               <LabelForm>Email:</LabelForm>
               <InputEmailForm id="email" placeholder="Informe o seu e-mail" />
@@ -88,7 +85,7 @@ export default function Login() {
           </div>
           <div>
             <ButtonSubmitForm>Entrar</ButtonSubmitForm>
-            <Exits href="/cadastro-conta">Não possui uma conta?</Exits>
+            <Exits href="/cadastro/aluno">Não possui uma conta?</Exits>
             <Exits href="/recuperacao-senha">Esqueci minha senha</Exits>
           </div>
         </div>

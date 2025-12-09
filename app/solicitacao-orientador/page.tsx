@@ -33,7 +33,7 @@ export default function SolicitacaoOrientador() {
             status="Aguardando Ass. Empregador"
           />
           <div className="grid lg:grid-cols-3 lg:space-x-[50px]">
-            <div className="mt-2.5 space-y-[20px]">
+            <div className="mt-2.5 space-y-5">
               <div>
                 <LabelForm>Nome do empregador:*</LabelForm>
                 <InputTextForm
@@ -63,7 +63,7 @@ export default function SolicitacaoOrientador() {
                 />
               </div>
             </div>
-            <div className="mt-2.5 space-y-[20px]">
+            <div className="mt-2.5 space-y-5">
               <div>
                 <LabelForm>Telefone da empresa:*</LabelForm>
                 <InputTelefone id="TelEmp" />
@@ -87,7 +87,7 @@ export default function SolicitacaoOrientador() {
                 />
               </div>
             </div>
-            <div className="mt-2.5 space-y-[20px]">
+            <div className="mt-2.5 space-y-5">
               <div className="items-center">
                 <LabelForm>Periodo de trabalho do aluno:*</LabelForm>
                 <InputPeriodoTrabalho

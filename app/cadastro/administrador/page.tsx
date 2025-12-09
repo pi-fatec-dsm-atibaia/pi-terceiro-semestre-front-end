@@ -7,25 +7,26 @@ import Form from "@/src/components/form";
 import InputCpfCnpj from "@/src/components/inputCpfCnpj";
 import InputEmailForm from "@/src/components/inputEmailForm";
 import InputPasswordForm from "@/src/components/inputPasswordForm";
+import InputTelefone from "@/src/components/inputTelefone";
 import InputTextForm from "@/src/components/inputTextForm";
 import { LabelForm } from "@/src/components/labelForm";
 import RedMarker from "@/src/components/redMarker";
-import { SelectForm } from "@/src/components/selectForm";
 import { Title1 } from "@/src/components/titles";
 import { useState } from "react";
 
-export default function CadastroOtr() {
+export default function CadastroAdm() {
   const [mensagem, setMensagem] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const data = {
-      nome: (document.getElementById("nomeOtr") as HTMLInputElement).value,
-      email: (document.getElementById("emailOtr") as HTMLInputElement).value,
-      cpf: (document.getElementById("cpfOtr") as HTMLInputElement).value,
-      curso: (document.getElementById("cursoOtr") as HTMLSelectElement).value,
-      senha: (document.getElementById("senhaOtr") as HTMLInputElement).value,
+      nome: (document.getElementById("nomeAdm") as HTMLInputElement).value,
+      email: (document.getElementById("emailAdm") as HTMLInputElement).value,
+      telefone: (document.getElementById("telefoneAdm") as HTMLSelectElement)
+        .value,
+      senha: (document.getElementById("senhaAdm") as HTMLInputElement).value,
+      cpf: (document.getElementById("cpfAdm") as HTMLInputElement).value,
       confirmSenha: (document.getElementById("confirm") as HTMLInputElement)
         .value,
     };
@@ -37,7 +38,8 @@ export default function CadastroOtr() {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/advisors/create-advisor",
+        "http://localhost:3000/api/admins/create-admin",
+
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -49,7 +51,7 @@ export default function CadastroOtr() {
       console.log(result);
 
       if (response.ok) {
-        setMensagem("Orientador cadastrado com sucesso!");
+        setMensagem("Administrador cadastrado com sucesso!");
       } else {
         setMensagem(result.message || "Erro ao cadastrar.");
       }
@@ -57,29 +59,40 @@ export default function CadastroOtr() {
       setMensagem("Falha na comunicação com o servidor.");
     }
   }
-
   return (
     <div className=" bg-(--c01)">
       <BackgroundGradient>
         <BotaoVoltar />
-
-        <Title1>Cadastro de Orientador</Title1>
+        <Title1>Cadastro de Administrador</Title1>
         <Form onSubmit={handleSubmit}>
-          <RedMarker>Dados do Orientador</RedMarker>
-          <div className="space-y-[40px]">
+          <RedMarker>Dados do Administrador</RedMarker>
+          <div className="space-y-10">
             <div className="space-x-3 grid sm:grid-cols-2 gap-3">
               <div>
                 <LabelForm>Nome:</LabelForm>
                 <InputTextForm
-                  id="nomeOtr"
-                  placeholder="Informe o nome do orientador"
+                  id="nomeAdm"
+                  placeholder="Informe o nome do administrador"
                 />
               </div>
               <div>
                 <LabelForm>Email:</LabelForm>
                 <InputEmailForm
-                  id="emailOtr"
-                  placeholder="Informe o email do orientador"
+                  id="emailAdm"
+                  placeholder="Informe o email do administrador"
+                />
+              </div>
+            </div>
+            <div className="space-x-3 grid sm:grid-cols-2 gap-3">
+              <div>
+                <LabelForm>Telefone:</LabelForm>
+                <InputTelefone id="telefoneAdm" />
+              </div>
+              <div>
+                <LabelForm>Senha:</LabelForm>
+                <InputPasswordForm
+                  id="senhaAdm"
+                  placeholder="Informe a senha do administrador"
                 />
               </div>
             </div>
@@ -87,30 +100,9 @@ export default function CadastroOtr() {
               <div>
                 <LabelForm>CPF:</LabelForm>
                 <InputCpfCnpj
-                  id="cpfOtr"
-                  placeholder="Informe o CPF do orientador"
+                  id="cpfAdm"
+                  placeholder="Informe o CPF do administrador"
                 />
-              </div>
-              <div className="space-y-3 grid">
-                <div>
-                  <LabelForm>Senha:</LabelForm>
-                  <InputPasswordForm
-                    id="senhaOtr"
-                    placeholder="Informe a senha do orientador"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="space-x-3 grid sm:grid-cols-2 gap-3">
-              <div>
-                <LabelForm>Curso Vinculado:</LabelForm>
-                <SelectForm
-                  id="cursoOtr"
-                  placeholder="Informe o curso do orientador"
-                >
-                  <option value="" selected disabled></option>
-                  <option value="dsm">DSM</option>
-                </SelectForm>
               </div>
               <div>
                 <LabelForm>Confirmação de senha:</LabelForm>
