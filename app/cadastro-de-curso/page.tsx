@@ -1,6 +1,7 @@
 "use client";
 
 import BackgroundGradient from "@/src/components/backgroundGradient";
+import { BotaoVoltar } from "@/src/components/botaoVoltar";
 import { ButtonSubmitForm } from "@/src/components/buttonSubmitForm";
 import Form from "@/src/components/form";
 import InputTextForm from "@/src/components/inputTextForm";
@@ -47,6 +48,8 @@ export default function CadastroCurso() {
   return (
     <div className=" bg-(--c01)">
       <BackgroundGradient>
+        <BotaoVoltar />
+
         <Title1>Cadastro de Curso</Title1>
         <Form onSubmit={handleSubmit}>
           <RedMarker>Dados do curso</RedMarker>

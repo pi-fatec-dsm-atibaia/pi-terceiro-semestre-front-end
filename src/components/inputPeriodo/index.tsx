@@ -14,7 +14,7 @@ export default function InputPeriodoTrabalho({
 }: InputPeriodoProps) {
   const [dataInicio, setDataInicio] = useState("");
   const [dataFim, setDataFim] = useState("");
-  const [erro, setErro] = useState("");
+  const [error, setError] = useState("");
 
   const validate = () => {
     if (required && (!dataInicio || !dataFim)) {
@@ -35,7 +35,7 @@ export default function InputPeriodoTrabalho({
 
   const handleBlur = () => {
     const message = validate();
-    setErro(message);
+    setError(message);
   };
 
   return (
@@ -47,12 +47,12 @@ export default function InputPeriodoTrabalho({
           value={dataInicio}
           onChange={(e) => {
             setDataInicio(e.target.value);
-            if (erro) setErro("");
+            if (error) setError("");
           }}
           onBlur={handleBlur}
           className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 bg-(--c01) w-100%
             ${
-              erro
+              error
                 ? "border border-red-500 focus:ring-red-500"
                 : "focus:ring-blue-600"
             }`}
@@ -67,19 +67,25 @@ export default function InputPeriodoTrabalho({
           required
           onChange={(e) => {
             setDataFim(e.target.value);
-            if (erro) setErro("");
+            if (error) setError("");
           }}
           onBlur={handleBlur}
           className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 bg-(--c01) w-100%
             ${
-              erro
+              error
                 ? "border border-red-500 focus:ring-red-500"
                 : "focus:ring-blue-600"
             }`}
         />
       </div>
 
-      {erro && <span className="text-red-600 text-sm">{erro}</span>}
+      <span
+        className={`${
+          error ? "visible text-red-600" : "invisible"
+        } max-sm:text-[65%] sm:text-[55%] lg:text-[70%] h-5`}
+      >
+        {error || "placeholder"}
+      </span>
     </div>
   );
 }

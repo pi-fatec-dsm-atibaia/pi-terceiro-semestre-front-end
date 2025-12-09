@@ -1,10 +1,13 @@
 import BackgroundGradient from "@/src/components/backgroundGradient";
+import { BotaoVoltar } from "@/src/components/botaoVoltar";
 import EquivalenciaForm from "@/src/components/equivalenciaForm";
 
 // Este é o Server Component da sua rota
 export default function EquivalenciasPage() {
   return (
     <BackgroundGradient>
+      <BotaoVoltar />
+
       {/* Adicione um padding horizontal ao contêiner principal para "empurrar" o conteúdo */}
       <div className="bg-red-section pt-10 pb-20 px-4 sm:px-16 mb-0">
         <h1 className="text-3xl font-bold text-black my-0">

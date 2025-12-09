@@ -13,7 +13,7 @@ export default function InputTelefone({
   minLength,
 }: InputFormProps) {
   const [telefone, setTelefone] = useState("");
-  const [erro, setErro] = useState("");
+  const [error, setError] = useState("");
 
   // Máscara
   const formatarTelefone = (valor: string) => {
@@ -51,12 +51,12 @@ export default function InputTelefone({
     const valorFormatado = formatarTelefone(e.target.value);
     setTelefone(valorFormatado);
 
-    if (erro) setErro("");
+    if (error) setError("");
   };
 
   const handleBlur = () => {
     const message = validate(telefone);
-    setErro(message);
+    setError(message);
   };
 
   return (
@@ -71,13 +71,18 @@ export default function InputTelefone({
         placeholder="Informe o número de telefone"
         className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01) w-100%
           ${
-            erro
+            error
               ? "border border-red-500 focus:ring-red-500"
               : "focus:ring-blue-600"
           }`}
       />
-
-      {erro && <span className="text-red-600 text-sm">{erro}</span>}
+      <span
+        className={`${
+          error ? "visible text-red-600" : "invisible"
+        } max-sm:text-[65%] sm:text-[55%] lg:text-[70%] h-5`}
+      >
+        {error || "placeholder"}
+      </span>{" "}
     </div>
   );
 }

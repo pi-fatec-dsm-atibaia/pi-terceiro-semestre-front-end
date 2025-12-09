@@ -1,4 +1,5 @@
 import BackgroundWhiteRed from "@/src/components/backgroundWhiteRed";
+import { BotaoVoltar } from "@/src/components/botaoVoltar";
 import CardDahboard from "@/src/components/card-dashboard";
 import { Title2 } from "@/src/components/titles";
 
@@ -6,6 +7,7 @@ export default function DashBoardAluno() {
   return (
     <div className="bg-(--c01)">
       <BackgroundWhiteRed>
+        <BotaoVoltar />
         <Title2>Selecione o tipo de serviço</Title2>
         <div className="w-full z-10 flex max-sm:flex-col justify-center gap-[5%] max-sm:space-y-5">
           {/*SOLICITAR*/}

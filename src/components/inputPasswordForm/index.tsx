@@ -49,25 +49,29 @@ export default function InputPasswordForm({
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="relative">
-        <input
-          id={id}
-          type={"password"}
-          placeholder={placeholder}
-          value={value}
-          required
-          onChange={(e) => setValue(e.target.value)}
-          onBlur={handleBlur}
-          className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01) w-100%
+      <input
+        id={id}
+        type={"password"}
+        placeholder={placeholder}
+        value={value}
+        required
+        onChange={(e) => setValue(e.target.value)}
+        onBlur={handleBlur}
+        className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01) w-100%
           ${
             error
               ? "border border-red-500 focus:ring-red-500"
               : "focus:ring-blue-600"
           }`}
-        />
-      </div>
+      />
 
-      {error && <span className="text-red-500 text-sm">{error}</span>}
+      <span
+        className={`${
+          error ? "visible text-red-600" : "invisible"
+        } max-sm:text-[65%] sm:text-[55%] lg:text-[70%] h-5`}
+      >
+        {error || "placeholder"}
+      </span>
     </div>
   );
 }

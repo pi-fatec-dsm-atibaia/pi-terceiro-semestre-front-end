@@ -13,7 +13,7 @@ export default function InputCpfCnpj({
   placeholder,
 }: InputFormProps) {
   const [documento, setDocumento] = useState("");
-  const [erro, setErro] = useState("");
+  const [error, setError] = useState("");
 
   {
     /*Mascaras*/
@@ -141,12 +141,12 @@ export default function InputCpfCnpj({
     const valorFormatado = formatarDocumento(e.target.value);
     setDocumento(valorFormatado);
 
-    if (erro) setErro("");
+    if (error) setError("");
   };
 
   const handleBlur = () => {
     const message = validate(documento);
-    setErro(message);
+    setError(message);
   };
 
   return (
@@ -155,19 +155,25 @@ export default function InputCpfCnpj({
         id={id}
         type="text"
         value={documento}
-        required
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder={placeholder}
-        className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01) w-100%
-          ${
-            erro
-              ? "border border-red-500 focus:ring-red-500"
-              : "focus:ring-blue-600"
-          }`}
+        className={`font-semibold focus:outline-none focus:ring-2 rounded-md p-2 w-full bg-(--c01)
+      ${
+        error
+          ? "border border-red-500 focus:ring-red-500"
+          : "focus:ring-blue-600"
+      }
+    `}
       />
 
-      {erro && <span className="text-red-600 text-sm">{erro}</span>}
+      <span
+        className={`${
+          error ? "visible text-red-600" : "invisible"
+        } max-sm:text-[65%] sm:text-[55%] lg:text-[70%] h-5`}
+      >
+        {error || "placeholder"}
+      </span>
     </div>
   );
 }

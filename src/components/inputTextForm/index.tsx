@@ -53,8 +53,13 @@ export default function InputTextForm({
             : "focus:ring-blue-600"
         }`}
       />
-
-      {error && <span className="text-red-500 text-sm">{error}</span>}
+      <span
+        className={`${
+          error ? "visible text-red-600" : "invisible"
+        } max-sm:text-[65%] sm:text-[55%] lg:text-[70%] h-5`}
+      >
+        {error || "placeholder"}
+      </span>{" "}
     </div>
   );
 }

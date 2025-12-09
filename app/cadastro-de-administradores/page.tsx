@@ -1,6 +1,7 @@
 "use client";
 
 import BackgroundGradient from "@/src/components/backgroundGradient";
+import { BotaoVoltar } from "@/src/components/botaoVoltar";
 import { ButtonSubmitForm } from "@/src/components/buttonSubmitForm";
 import Form from "@/src/components/form";
 import InputCpfCnpj from "@/src/components/inputCpfCnpj";
@@ -61,6 +62,7 @@ export default function CadastroAdm() {
   return (
     <div className=" bg-(--c01)">
       <BackgroundGradient>
+        <BotaoVoltar />
         <Title1>Cadastro de Administrador</Title1>
         <Form onSubmit={handleSubmit}>
           <RedMarker>Dados do Administrador</RedMarker>

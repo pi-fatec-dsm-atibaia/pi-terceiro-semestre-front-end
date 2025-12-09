@@ -1,10 +1,14 @@
 "use client";
 
 import BackgroundGradient from "@/src/components/backgroundGradient";
+import BotaoVoltar from "@/src/components/botaoVoltar";
 import { ButtonSubmitForm } from "@/src/components/buttonSubmitForm";
 import Form from "@/src/components/form";
+import InputCpfCnpj from "@/src/components/inputCpfCnpj";
 import InputEmailForm from "@/src/components/inputEmailForm";
 import InputPasswordForm from "@/src/components/inputPasswordForm";
+import InputRg from "@/src/components/inputRg";
+import InputTelefone from "@/src/components/inputTelefone";
 import InputTextForm from "@/src/components/inputTextForm";
 import { LabelForm } from "@/src/components/labelForm";
 import RedMarker from "@/src/components/redMarker";
@@ -61,6 +65,8 @@ export default function CadastroAluno() {
 
   return (
     <BackgroundGradient>
+      <BotaoVoltar />
+
       <Title1>Cadastro de alunos!</Title1>
       <Form onSubmit={handleSubmit}>
         <RedMarker>Faça seu cadastro</RedMarker>
@@ -75,16 +81,16 @@ export default function CadastroAluno() {
           </div>
           <div>
             <LabelForm>Telefone:</LabelForm>
-            <InputTextForm id="telefone" placeholder="Digite seu telefone" />
+            <InputTelefone id="telefone" />
           </div>
 
           <div>
             <LabelForm>CPF:</LabelForm>
-            <InputTextForm id="cpf" placeholder="Digite seu CPF" />
+            <InputCpfCnpj id="cpf" placeholder="Digite seu CPF" />
           </div>
           <div>
             <LabelForm>RG:</LabelForm>
-            <InputTextForm id="rg" placeholder="Digite seu RG" />
+            <InputRg id="rg" placeholder="Digite seu RG" />
           </div>
           <div>
             <LabelForm>RA:</LabelForm>
@@ -94,7 +100,9 @@ export default function CadastroAluno() {
           <div>
             <LabelForm>Curso:</LabelForm>
             <SelectForm id="curso">
-              <option value="" selected disabled></option>
+              <option value="" selected disabled>
+                Escolha
+              </option>
               <option value="dsm">DSM</option>
             </SelectForm>
           </div>
